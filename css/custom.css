@@ -476,19 +476,25 @@ body {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.white-box {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: white;
-	padding: 20px;
-	border-radius: 5px;
+.modal {
+	padding: 0;
+	--bs-modal-padding: 0;
+	--bs-modal-width: 350px !important;
+}
 
+.group-box {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
 
 	justify-content: center;
 	align-items: center;
+
+	margin-top: -46px;
+	padding: 20px;
+}
+
+.group-box img {
+	height: 175px;
+	width: auto;
 }
