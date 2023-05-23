@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -70,14 +71,16 @@
 						<h3>Personal Information</h3>
 
 						<div class="form-group">
-							<select class="form-select form-control" style="padding-left: 12px; padding-top: 16px; padding-bottom: 16px" aria-label=".form-select-lg example">
-								<option selected class="form-control">Salutation<span class="required-text">*</span></option>
-								<option value="1">Mr.</option>
-								<option value="2">Mrs.</option>
-								<option value="3">Ms.</option>
-								<option value="4">Dr.</option>
-								<option value="5">Prof.</option>
-							</select>
+							<div class="form-floating">
+								<select id="salutation" class="form-select">
+									<option value="Mr">Mr</option>
+									<option value="Mrs">Mrs</option>
+									<option value="Ms">Ms</option>
+									<option value="Dr">Dr</option>
+									<option value="Prof">Prof</option>
+								</select>
+								<label for="salutation" class="required">Salutation</label>
+							</div>
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="text" class="form-control" id="floatingInput" placeholder="Sarah" />
@@ -320,9 +323,7 @@
 									<div class="form-control" id="floatingInput" style="padding: 16px">
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="" id="checkprivacystatement" />
-											<label class="form-check-label" for="checkprivacystatement" style="font-size: 14px"
-												><span>I acknowledge that I have read and agree to the terms in the <a href="https://www.nscc.sg/privacy-statement" target="_blank">Privacy Statement</a>.</span></label
-											>
+											<label class="form-check-label" for="checkprivacystatement" style="font-size: 14px"><span>I acknowledge that I have read and agree to the terms in the <a href="https://www.nscc.sg/privacy-statement" target="_blank">Privacy Statement</a>.</span></label>
 										</div>
 									</div>
 									<div class="invalid-feedback">Please check the box to confirm that you accept the terms and conditions and privacy policy.</div>
@@ -335,9 +336,7 @@
 									<div class="form-control" id="floatingInput" placeholder="sarah.tan@acmeinnovations.com" style="padding: 16px">
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="" id="checkaup" />
-											<label class="form-check-label" for="checkaup" style="font-size: 14px"
-												><span>I agree to NSCC's <a href="https://help.nscc.sg/aup/" target="_blank">Acceptable Use Policy</a>.</span></label
-											>
+											<label class="form-check-label" for="checkaup" style="font-size: 14px"><span>I agree to NSCC's <a href="https://help.nscc.sg/aup/" target="_blank">Acceptable Use Policy</a>.</span></label>
 										</div>
 									</div>
 									<div class="invalid-feedback">Please check the box to confirm that you accept the terms and conditions and privacy policy.</div>
@@ -385,24 +384,6 @@
 			</div>
 		</div>
 
-		<script>
-			// Select all elements with the class name "required"
-			const elements = document.getElementsByClassName("required");
-
-			// Loop through each element and modify its HTML content
-			for (let i = 0; i < elements.length; i++) {
-				const element = elements[i];
-
-				// Create a new <span> element for the red asterisk
-				const asterisk = document.createElement("span");
-				asterisk.style.color = "var(--color-error-red)";
-				asterisk.innerHTML = "*";
-
-				// Insert the <span> element after the existing text
-				element.appendChild(asterisk);
-			}
-		</script>
-
 		<script src="js/custom.js"></script>
 
 		<!-- bootstrap core js -->
@@ -415,4 +396,5 @@
 		<!-- core theme js -->
 		<script src="js/scripts.js"></script>
 	</body>
+
 </html>

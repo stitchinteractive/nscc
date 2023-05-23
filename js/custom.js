@@ -17,6 +17,22 @@ const back3Btn = document.getElementById("back3");
 let currentState = 0; // Initialize current state to state 0
 let mobileState = 0; // Initialize current state to state 0
 
+// Select all elements with the class name "required"
+const elements = document.getElementsByClassName("required");
+
+// Loop through each element and modify its HTML content
+for (let i = 0; i < elements.length; i++) {
+	const element = elements[i];
+
+	// Create a new <span> element for the red asterisk
+	const asterisk = document.createElement("span");
+	asterisk.style.color = "var(--color-error-red)";
+	asterisk.innerHTML = "*";
+
+	// Insert the <span> element after the existing text
+	element.appendChild(asterisk);
+}
+
 function updateState(currentState) {
 	// Add event listeners for each button to change the state accordingly
 	if (currentState === 0) {
