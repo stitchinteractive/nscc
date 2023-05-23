@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -24,17 +23,17 @@
 			</navbar>
 			<div class="new-row row-flex">
 				<div class="video-container">
-					<video id="background-video" autoplay loop muted poster="./im/gradient.mp4">
+					<video id="background-video" class="hide-lg" autoplay loop muted poster="./im/gradient.mp4">
 						<source src="./im/gradient.mp4" type="video/mp4" />
 					</video>
-					<div class="start-content" style="background: none" id="start-content">
+					<div class="start-content" id="start-content">
 						<h3>Create your new NSCC Account</h3>
 						<p>
 							Welcome to National Supercomputing Centre (&quot;NSCC&quot;) Account Creation Form.<br /><br />
-							Please complete the form to request for a user account. <br class="hide-sm" />Kindly note that it will take 7 working days to process the creation of user account.<br /><br />
-							Note: If you are from A*STAR, NTU, NUS, SUTD, TCOMS, SMU, SIT, SP, TP or RP, <br class="hide-sm" />you may skip this form and proceed to <a href="https://user.nscc.sg/saml/">New User Enrollment</a>.
+							Please complete the form to request for a user account. Kindly note that it will take 7 working days to process the creation of user account.<br /><br />
+							Note: If you are from A*STAR, NTU, NUS, SUTD, TCOMS, SMU, SIT, SP, TP or RP, you may skip this form and proceed to <a href="https://user.nscc.sg/saml/">New User Enrollment</a>.
 						</p>
-						<div style="background-color: white; height: 1px"></div>
+						<div style="background-color: black; height: 1px"></div>
 						<div class="hide-lg" style="display: flex; flex-direction: row; justify-content: flex-end">
 							<button id="continue0" type="button" class="btn btn-primary">
 								<h4>Get started</h4>
@@ -69,40 +68,48 @@
 					</div>
 					<div class="step-1 step-content" id="step-1">
 						<h3>Personal Information</h3>
+
 						<div class="form-group">
+							<select class="form-select form-control" style="padding-left: 12px; padding-top: 16px; padding-bottom: 16px" aria-label=".form-select-lg example">
+								<option selected class="form-control">Salutation<span class="required-text">*</span></option>
+								<option value="1">Mr.</option>
+								<option value="2">Mrs.</option>
+								<option value="3">Ms.</option>
+								<option value="4">Dr.</option>
+								<option value="5">Prof.</option>
+							</select>
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="text" class="form-control" id="floatingInput" placeholder="Sarah" />
-									<label for="floatingInput">First name</label>
+									<label for="floatingInput" class="required">First name</label>
 								</div>
 								<div class="invalid-feedback">This is a mandatory field.</div>
 							</div>
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="text" class="form-control" id="floatingInput" placeholder="Tan" />
-									<label for="floatingPassword">Last name</label>
+									<label for="floatingPassword" class="required">Last name</label>
 								</div>
 								<div class="invalid-feedback">This is a mandatory field.</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Singaporean" />
-									<label for="floatingInput">Nationality</label>
-								</div>
-								<div class="invalid-feedback">
-									Please select a valid nationality.<br />
-									Did you mean Singaporean?
-								</div>
+						<div class="input-group has-validation">
+							<div class="form-floating">
+								<input type="text" class="form-control" id="floatingInput" placeholder="Singaporean" />
+								<label for="floatingInput" class="required">Nationality</label>
 							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="AcmeRD01" />
-									<label for="floatingInput">Preferred NSCC User ID</label>
-								</div>
-								<div class="invalid-feedback">Please enter a unique user ID that is 8 characters or less.</div>
+							<div class="invalid-feedback">
+								Please select a valid nationality.<br />
+								Did you mean Singaporean?
 							</div>
+						</div>
+						<div class="input-group has-validation">
+							<div class="form-floating">
+								<input type="text" class="form-control" id="floatingInput" placeholder="AcmeRD01" />
+								<label for="floatingInput" class="required">Preferred NSCC User ID (Max 8 Characters)</label>
+							</div>
+							<div class="invalid-feedback">Please enter a unique user ID that is 8 characters or less.</div>
+							<div class="invalid-feedback help-text">Note: User ID creation is subjected to availability and approvals. A new User ID will be assigned automatically if the requested User ID is not available.</div>
 						</div>
 
 						<div class="hide-md" style="display: flex; flex-direction: row; justify-content: flex-end">
@@ -113,12 +120,12 @@
 						<line></line>
 					</div>
 					<div class="step-2 step-content" id="step-2">
-						<h3>Organizational Information</h3>
+						<h3>Organisation Information</h3>
 						<div class="form-group">
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="text" class="form-control" id="floatingInput" placeholder="Acme Innovations" />
-									<label for="floatingInput">Company</label>
+									<label for="floatingInput" class="required">Name of Organisation</label>
 								</div>
 								<div class="invalid-feedback">This is a mandatory field.</div>
 							</div>
@@ -127,14 +134,14 @@
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="text" class="form-control" id="floatingInput" placeholder="Research and Development" />
-									<label for="floatingInput">Organization / Department</label>
+									<label for="floatingInput" class="required">Department</label>
 								</div>
 								<div class="invalid-feedback">This is a mandatory field.</div>
 							</div>
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="text" class="form-control" id="floatingInput" placeholder="Research Scientist" />
-									<label for="floatingInput">Designation</label>
+									<label for="floatingInput" class="required">Designation</label>
 								</div>
 								<div class="invalid-feedback">This is a mandatory field.</div>
 							</div>
@@ -143,14 +150,14 @@
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="tel" class="form-control" id="floatingInput" placeholder="+65 8875 8875" />
-									<label for="floatingInput">Contact number</label>
+									<label for="floatingInput" class="required">Official contact number</label>
 								</div>
 								<div class="invalid-feedback">Please enter a valid Singapore phone number.</div>
 							</div>
 							<div class="input-group has-validation">
 								<div class="form-floating">
 									<input type="email" class="form-control" id="floatingInput" placeholder="sarah.tan@acmeinnovations.com" />
-									<label for="floatingInput">Email address</label>
+									<label for="floatingInput" class="required">Official email address</label>
 								</div>
 								<div class="invalid-feedback">Please enter a valid email address that is not from a private email domain (e.g. gmail.com, yahoo.com).</div>
 							</div>
@@ -175,7 +182,7 @@
 
 						<div class="form-control para-group">
 							<div class="checkbox-group">
-								<h3 style="text-transform: none">Research Domains</h3>
+								<h3 style="text-transform: none" class="required">Research Domains</h3>
 								<p>Please indicate the domains that your project is related to:</p>
 							</div>
 							<div class="checkbox-group">
@@ -214,7 +221,7 @@
 
 						<div class="form-control para-group">
 							<div class="checkbox-group">
-								<h3 style="text-transform: none">Research Collaboration</h3>
+								<h3 style="text-transform: none" class="required">Research Collaboration</h3>
 								<p>Are you working with other government agencies or research collaborators?</p>
 							</div>
 							<div class="checkbox-group">
@@ -228,12 +235,12 @@
 								</div>
 							</div>
 							<div class="checkbox-group">
-								<p>If you answered “Yes” to the above, please indicate the name of the organization.</p>
+								<p>If you answered “Yes” to the above, please indicate the name of the organisation.</p>
 								<div class="form-group">
 									<div class="input-group has-validation">
 										<div class="form-floating">
 											<input type="text" class="form-control" id="floatingInput" placeholder="Acme Innovations" />
-											<label for="floatingInput">Name of organization</label>
+											<label for="floatingInput">Name of organisation</label>
 										</div>
 										<div class="invalid-feedback">This field is mandatory as you selected "Yes".</div>
 									</div>
@@ -241,7 +248,40 @@
 							</div>
 						</div>
 						<div class="form-control para-group">
-							<p>If you are part of a collaboration with existing users from NSCC Stakeholder organizations i.e. A*STAR, NTU, NUS and SUTD, please download the sponsorship form from <a href="https://www.nscc.sg/">LINK TBA by JX</a> and upload the completed form here.</p>
+							<div class="checkbox-group">
+								<h3 style="text-transform: none">Utilisation Projection</h3>
+							</div>
+							<div class="input-group has-validation">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="floatingInput" placeholder="Project title" />
+									<label for="floatingInput" class="required">Project title</label>
+								</div>
+								<div class="invalid-feedback">This is a mandatory field.</div>
+							</div>
+							<div class="input-group has-validation">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="floatingInput" placeholder="10 CPU/GPU-hours" />
+									<label for="floatingInput" class="required">Estimated computational (CPU/GPU-hours) requirements?</label>
+								</div>
+								<div class="invalid-feedback">This is a mandatory field.</div>
+							</div>
+							<div class="input-group has-validation">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="floatingInput" placeholder="10 GB" />
+									<label for="floatingInput" class="required">Estimated storage (GB) requirements?</label>
+								</div>
+								<div class="invalid-feedback">This is a mandatory field.</div>
+							</div>
+							<div class="input-group has-validation">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="floatingInput" placeholder="Project description" />
+									<label for="floatingInput" class="required">Project description</label>
+								</div>
+								<div class="invalid-feedback">This is a mandatory field.</div>
+							</div>
+						</div>
+						<div class="form-control para-group">
+							<p>If you are part of a collaboration with existing users from NSCC Stakeholder organisations i.e. A*STAR, NTU, NUS and SUTD, please download the sponsorship form from <a href="https://www.nscc.sg/" target="_blank">LINK TBA by JX</a> and upload the completed form here.</p>
 
 							<div class="form-group">
 								<div class="input-group has-validation">
@@ -275,13 +315,13 @@
 							</p>
 
 							<div class="step-content">
-								<h3 style="text-transform: none">NSCC's Privacy Statement*</h3>
+								<h3 style="text-transform: none" class="required">NSCC's Privacy Statement</h3>
 								<div class="input-group has-validation">
 									<div class="form-control" id="floatingInput" style="padding: 16px">
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="" id="checkprivacystatement" />
 											<label class="form-check-label" for="checkprivacystatement" style="font-size: 14px"
-												><span>I acknowledge that I have read and agree to the terms in the <a href="https://www.nscc.sg/privacy-statement">Privacy Statement</a>.</span></label
+												><span>I acknowledge that I have read and agree to the terms in the <a href="https://www.nscc.sg/privacy-statement" target="_blank">Privacy Statement</a>.</span></label
 											>
 										</div>
 									</div>
@@ -290,13 +330,13 @@
 							</div>
 
 							<div class="step-content">
-								<h3 style="text-transform: none">NSCC's Acceptable Use Policy*</h3>
+								<h3 style="text-transform: none" class="required">NSCC's Acceptable Use Policy</h3>
 								<div class="input-group has-validation">
 									<div class="form-control" id="floatingInput" placeholder="sarah.tan@acmeinnovations.com" style="padding: 16px">
 										<div class="form-check">
 											<input class="form-check-input" type="checkbox" value="" id="checkaup" />
 											<label class="form-check-label" for="checkaup" style="font-size: 14px"
-												><span>I agree to NSCC's <a href="https://help.nscc.sg/aup/">Acceptable Use Policy</a>.</span></label
+												><span>I agree to NSCC's <a href="https://help.nscc.sg/aup/" target="_blank">Acceptable Use Policy</a>.</span></label
 											>
 										</div>
 									</div>
@@ -304,7 +344,7 @@
 								</div>
 							</div>
 
-							<p>For further assistance, please contact us at <a href="mailto:bizdev@nscc.sg">bizdev@nscc.sg</a></p>
+							<p>For further assistance, please contact us at <a href="mailto:bizdev@nscc.sg" target="_blank">bizdev@nscc.sg</a>.</p>
 						</div>
 
 						<div class="form-group">
@@ -333,11 +373,10 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header" style="border-bottom: none; z-index: +1">
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="box-shadow: none;"></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="box-shadow: none"></button>
 					</div>
 					<div class="modal-body" style="height: 100%; width: 100%">
-						<div class="group-box">
-							<img src="im/success.gif" />
+						<div class="group-box" style="padding-top: 50px; padding-bottom: 50px">
 							<h3 style="text-transform: none">Your request has been submitted!</h3>
 							<p>Check your inbox for more details.</p>
 						</div>
@@ -345,6 +384,24 @@
 				</div>
 			</div>
 		</div>
+
+		<script>
+			// Select all elements with the class name "required"
+			const elements = document.getElementsByClassName("required");
+
+			// Loop through each element and modify its HTML content
+			for (let i = 0; i < elements.length; i++) {
+				const element = elements[i];
+
+				// Create a new <span> element for the red asterisk
+				const asterisk = document.createElement("span");
+				asterisk.style.color = "var(--color-error-red)";
+				asterisk.innerHTML = "*";
+
+				// Insert the <span> element after the existing text
+				element.appendChild(asterisk);
+			}
+		</script>
 
 		<script src="js/custom.js"></script>
 
@@ -358,5 +415,4 @@
 		<!-- core theme js -->
 		<script src="js/scripts.js"></script>
 	</body>
-
 </html>

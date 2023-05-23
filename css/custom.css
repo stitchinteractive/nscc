@@ -224,6 +224,14 @@ line {
 	padding-right: 5px;
 }
 
+.help-text {
+	display: block;
+	color: var(--color-black);
+	margin-top: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
 .form-label {
 	margin-top: 10px;
 	padding-left: 5px;
@@ -298,8 +306,8 @@ body {
 .start-content {
 	height: calc(100vh - var(--navbar-height) - 36px);
 	flex-grow: 1;
-	color: var(--color-white);
-	background-color: var(--color-background);
+	color: rgba(0, 0, 0, 0.7);
+	background-color: #fbcaa0;
 	overflow-y: auto;
 
 	display: flex;
@@ -363,8 +371,8 @@ body {
 	.start-content {
 		height: calc(100vh - var(--navbar-height) - 48px);
 		flex-grow: 1;
-		color: var(--color-white);
-		background-color: var(--color-background);
+		color: rgba(0, 0, 0, 0.7);
+		background-color: #fbcaa0;
 		overflow-y: auto;
 
 		display: flex;
@@ -433,8 +441,8 @@ body {
 	.start-content {
 		flex-grow: 1;
 		height: calc(100vh - var(--navbar-height) - 80px);
-		color: var(--color-white);
-		background-color: var(--color-background);
+		color: rgba(0, 0, 0, 0.7);
+		background-color: #fbcaa0;
 		overflow-y: auto;
 
 		display: flex;
@@ -497,4 +505,18 @@ body {
 .group-box img {
 	height: 175px;
 	width: auto;
+}
+
+.required-text {
+	color: var(--color-error-red) !important;
+	background-color: red;
+}
+
+.form-select {
+	padding: 0.375rem 0.75rem;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
 }
