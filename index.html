@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,6 +14,11 @@
 		<link href="css/styles.css" rel="stylesheet" />
 		<link href="css/custom.css" rel="stylesheet" />
 		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+		<!-- Known Bugs -->
+		<!-- Mobile version Step 3 and 4 Duplicate issues showing on 4 -->
+		<!-- Have not added checkbox validation -->
+		<!-- Have not added validation tally -->
 	</head>
 
 	<body>
@@ -71,101 +75,145 @@
 						<h3>Personal Information</h3>
 
 						<div class="form-group">
-							<div class="form-floating">
-								<select id="salutation" class="form-select form-control">
-									<option value="" selected>Please select an option</option>
-									<option value="Mr">Mr</option>
-									<option value="Mrs">Mrs</option>
-									<option value="Ms">Ms</option>
-									<option value="Dr">Dr</option>
-									<option value="Prof">Prof</option>
-								</select>
-								<label for="salutation" class="required">Salutation</label>
-							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Sarah" />
-									<label for="floatingInput" class="required">First name</label>
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('salutation')">
+									<div>
+										<label class="required" for="salutation">Salutation</label>
+									</div>
+									<div>
+										<input type="textarea" id="salutation" name="salutation" placeholder="Mrs" data-validation="required" data-error-message="" onblur="removeFocusClass('salutation'); validateFormField('salutation')" onfocus="addFocusClass('salutation')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="salutation-error" class="error-message"></span>
 							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Tan" />
-									<label for="floatingPassword" class="required">Last name</label>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('firstname')">
+									<div>
+										<label class="required" for="firstname">First name</label>
+									</div>
+									<div>
+										<input type="textarea" id="firstname" name="firstname" placeholder="Sarah" data-validation="required" data-error-message="" onblur="removeFocusClass('firstname'); validateFormField('firstname')" onfocus="addFocusClass('firstname')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="firstname-error" class="error-message"></span>
+							</div>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('lastname')">
+									<div>
+										<label class="required" for="lastname">Last name</label>
+									</div>
+									<div>
+										<input type="textarea" id="lastname" name="lastname" placeholder="Tan" data-validation="required" data-error-message="" onblur="removeFocusClass('lastname'); validateFormField('lastname')" onfocus="addFocusClass('lastname')" />
+									</div>
+								</div>
+								<span id="lastname-error" class="error-message"></span>
 							</div>
 						</div>
-						<div class="input-group has-validation">
-							<div class="form-floating">
-								<input type="text" class="form-control" id="floatingInput" placeholder="Singaporean" />
-								<label for="floatingInput" class="required">Nationality</label>
+
+						<div class="form-group">
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('nationality')">
+									<div>
+										<label class="required" for="nationality">Nationality</label>
+									</div>
+									<div>
+										<input type="textarea" id="nationality" name="nationality" placeholder="Singaporean" data-validation="required" data-error-message="" onblur="removeFocusClass('nationality'); validateFormField('nationality')" onfocus="addFocusClass('nationality')" />
+									</div>
+								</div>
+								<span id="nationality-error" class="error-message"></span>
 							</div>
-							<div class="invalid-feedback">
-								Please select a valid nationality.<br />
-								Did you mean Singaporean?
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('userid')">
+									<div>
+										<label class="required" for="userid">Preferred NSCC User ID</label>
+									</div>
+									<div>
+										<input type="textarea" id="userid" name="userid" placeholder="AcmeRD01" data-validation="required userid" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
+									</div>
+								</div>
+								<span id="userid-error" class="error-message"></span>
 							</div>
 						</div>
-						<div class="input-group has-validation">
-							<div class="form-floating">
-								<input type="text" class="form-control" id="floatingInput" placeholder="AcmeRD01" />
-								<label for="floatingInput" class="required">Preferred NSCC User ID (Max 8 Characters)</label>
-							</div>
-							<div class="invalid-feedback">Please enter a unique user ID that is 8 characters or less.</div>
-							<div class="invalid-feedback help-text">Note: User ID creation is subjected to availability and approvals. A new User ID will be assigned automatically if the requested User ID is not available.</div>
-						</div>
+						<span class="help-message">Note: User ID is limited to 8 characters and subjected to availability and approval. A new User ID will be assigned if the requested User ID is not available. </span>
 
 						<div class="hide-md" style="display: flex; flex-direction: row; justify-content: flex-end">
 							<button id="continue1" type="button" class="btn btn-primary">
 								<h4>Continue</h4>
 							</button>
 						</div>
-						<line></line>
+						<line class="hide-md"></line>
 					</div>
 					<div class="step-2 step-content" id="step-2">
 						<h3>Organisation Information</h3>
 						<div class="form-group">
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Acme Innovations" />
-									<label for="floatingInput" class="required">Name of Organisation</label>
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('organisation')">
+									<div>
+										<label class="required" for="organisation">Name of Organisation</label>
+									</div>
+									<div>
+										<input type="text" id="organisation" name="organisation" placeholder="Acme Innovations" data-validation="required" data-error-message="" onblur="removeFocusClass('organisation'); validateFormField('organisation')" onfocus="addFocusClass('organisation')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="organisation-error" class="error-message"></span>
 							</div>
 						</div>
+
 						<div class="form-group">
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Research and Development" />
-									<label for="floatingInput" class="required">Department</label>
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('department')">
+									<div>
+										<label class="required" for="department">Department</label>
+									</div>
+									<div>
+										<input type="text" id="department" name="department" placeholder="Research and Development" data-validation="required" data-error-message="" onblur="removeFocusClass('department'); validateFormField('department')" onfocus="addFocusClass('department')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="department-error" class="error-message"></span>
 							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Research Scientist" />
-									<label for="floatingInput" class="required">Designation</label>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('designation')">
+									<div>
+										<label class="required" for="designation">Designation</label>
+									</div>
+									<div>
+										<input type="text" id="designation" name="designation" placeholder="Research Scientist" data-validation="required" data-error-message="" onblur="removeFocusClass('designation'); validateFormField('designation')" onfocus="addFocusClass('designation')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="designation-error" class="error-message"></span>
 							</div>
 						</div>
+
 						<div class="form-group">
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="tel" class="form-control" id="floatingInput" placeholder="+65 8875 8875" />
-									<label for="floatingInput" class="required">Official contact number</label>
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('contact_number')">
+									<div>
+										<label class="required" for="contact_number">Official contact number</label>
+									</div>
+									<div>
+										<input type="text" id="contact_number" name="contact_number" placeholder="+65 8875 8875" data-validation="required" data-error-message="" onblur="removeFocusClass('contact_number'); validateFormField('contact_number')" onfocus="addFocusClass('contact_number')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">Please enter a valid Singapore phone number.</div>
+								<span id="contact_number-error" class="error-message"></span>
 							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="email" class="form-control" id="floatingInput" placeholder="sarah.tan@acmeinnovations.com" />
-									<label for="floatingInput" class="required">Official email address</label>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('email_address')">
+									<div>
+										<label class="required" for="email_address">Official email address</label>
+									</div>
+									<div>
+										<input type="email" id="email_address" name="email_address" placeholder="sarah.tan@acmeinnovations.com" data-validation="required email" data-error-message="" onblur="removeFocusClass('email_address'); validateFormField('email_address')" onfocus="addFocusClass('email_address')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">Please enter a valid email address that is not from a private email domain (e.g. gmail.com, yahoo.com).</div>
+								<span id="email_address-error" class="error-message"></span>
 							</div>
 						</div>
+
 						<div class="hide-md" style="display: flex; flex-direction: row; justify-content: space-between">
 							<button id="back1" type="button" class="btn btn-back">
 								<img src="im/back.svg" alt="Back Arrow" />
@@ -175,19 +223,75 @@
 								<h4>Continue</h4>
 							</button>
 						</div>
-						<line></line>
+						<line class="hide-md"></line>
 					</div>
 					<div class="step-3 step-content" id="step-3">
 						<h3>Project Information</h3>
-						<div class="form-floating">
-							<input type="text" class="form-control" id="floatingInput" placeholder="ACME_RD_2023" />
-							<label for="floatingInput">Project ID (if applicable)</label>
+						<div class="form-group">
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('projec_id')">
+									<div>
+										<label for="projec_id">Project ID (if applicable)</label>
+									</div>
+									<div>
+										<input type="text" id="projec_id" name="projec_id" placeholder="ACME_RD_2023" data-validation="" data-error-message="" onblur="removeFocusClass('projec_id'); validateFormField('projec_id')" onfocus="addFocusClass('projec_id')" />
+									</div>
+								</div>
+								<span id="projec_id-error" class="error-message"></span>
+							</div>
 						</div>
 
 						<div class="form-control para-group">
 							<div class="checkbox-group">
-								<h3 style="text-transform: none" class="required">Research Domains</h3>
-								<p>Please indicate the domains that your project is related to:</p>
+								<h3 style="text-transform: none">Research Collaboration</h3>
+								<p class="required">Please indicate if your project involves other collaborators</p>
+							</div>
+							<div class="checkbox-group">
+								<div class="form-check">
+									<input class="form-check-input" onclick="handleRadioChange('A')" type="radio" name="exampleRadios" id="researchcollaboration1" />
+									<label class="form-check-label" onclick="handleRadioChange('A')" for="researchcollaboration1"> Stakeholder collaborators i.e. A*STAR, NTU, NUS, SUTD </label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" onclick="handleRadioChange('B')" type="radio" name="exampleRadios" id="researchcollaboration2" />
+									<label class="form-check-label" onclick="handleRadioChange('B')" for="researchcollaboration2"> Government agencies </label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" onclick="handleRadioChange('C')" type="radio" name="exampleRadios" id="researchcollaboration3" />
+									<label class="form-check-label" onclick="handleRadioChange('C')" for="researchcollaboration3"> Other research collaborators such as IHLs or corporations </label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" onclick="handleRadioChange('D')" type="radio" name="exampleRadios" id="researchcollaboration4" />
+									<label class="form-check-label" onclick="handleRadioChange('D')" for="researchcollaboration4"> The project does not involve other collaborators </label>
+								</div>
+							</div>
+							<div class="floating-label option-b">
+								<div class="form-field border-normal" onclick="selectInputField('governmentagencies')">
+									<div>
+										<label for="governmentagencies">Specify the government agencies</label>
+									</div>
+									<div>
+										<input type="textarea" id="governmentagencies" name="governmentagencies" placeholder=" Singapore Consortium for Synthetic Biology" data-validation="required" data-error-message="This field is required for the selection of &ldquo;Government agencies&rdquo;" onblur="removeFocusClass('governmentagencies'); validateFormField('governmentagencies')" onfocus="addFocusClass('governmentagencies')" />
+									</div>
+								</div>
+								<span id="governmentagencies-error" class="error-message"></span>
+							</div>
+							<div class="floating-label option-c">
+								<div class="form-field border-normal" onclick="selectInputField('otherresearchcollaborators')">
+									<div>
+										<label for="otherresearchcollaborators">Specify the other research collaborators</label>
+									</div>
+									<div>
+										<input type="textarea" id="otherresearchcollaborators" name="otherresearchcollaborators" placeholder="IHLs or corporations" data-validation="required" data-error-message="Please specify the other research collaborators" onblur="removeFocusClass('otherresearchcollaborators'); validateFormField('otherresearchcollaborators')" onfocus="addFocusClass('otherresearchcollaborators')" />
+									</div>
+								</div>
+								<span id="otherresearchcollaborators-error" class="error-message"></span>
+							</div>
+						</div>
+
+						<div class="flow-a form-control para-group hide-start">
+							<div class="checkbox-group">
+								<h3 style="text-transform: none">Research Domains</h3>
+								<p class="required">Please indicate the domains that your project is related to</p>
 							</div>
 							<div class="checkbox-group">
 								<div class="form-check">
@@ -210,82 +314,159 @@
 									<input class="form-check-input" type="checkbox" value="" id="researchdomain5" />
 									<label class="form-check-label" for="researchdomain5"> Others, please provide details below </label>
 								</div>
-								<div class="form-group">
-									<div class="input-group has-validation">
-										<div class="form-floating">
-											<input type="text" class="form-control" id="floatingInput" placeholder="Health Sciences" />
-											<label for="floatingInput">Other domains</label>
-										</div>
-										<div class="invalid-feedback">This field is mandatory as you selected "Others"</div>
+							</div>
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('lastname')">
+									<div>
+										<label class="required" for="lastname">Specify the other domains</label>
 									</div>
-									<!-- <div class="hide-sm"></div> -->
+									<div>
+										<input type="textarea" id="lastname" name="lastname" placeholder="Other domains" data-validation="required" data-error-message="" onblur="removeFocusClass('lastname'); validateFormField('lastname')" onfocus="addFocusClass('lastname')" />
+									</div>
 								</div>
+								<span id="lastname-error" class="error-message"></span>
 							</div>
 						</div>
 
-						<div class="form-control para-group">
+						<div class="flow-a form-control para-group">
 							<div class="checkbox-group">
-								<h3 style="text-transform: none" class="required">Research Collaboration</h3>
-								<p>Are you working with other government agencies or research collaborators?</p>
+								<p class="required">Is your research project linked to a National Programme?</p>
 							</div>
 							<div class="checkbox-group">
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="exampleRadios" id="researchcollaboration1" />
-									<label class="form-check-label" for="researchcollaboration1"> No </label>
+									<input class="form-check-input" onclick="noyesChange('A')" type="radio" name="exampleRadios" id="researchcollaboration1" />
+									<label class="form-check-label" onclick="noyesChange('A')" for="researchcollaboration1"> No </label>
 								</div>
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="exampleRadios" id="researchcollaboration2" />
-									<label class="form-check-label" for="researchcollaboration2"> Yes </label>
+									<input class="form-check-input" onclick="noyesChange('B')" type="radio" name="exampleRadios" id="researchcollaboration2" />
+									<label class="form-check-label" onclick="noyesChange('B')" for="researchcollaboration2"> Yes </label>
 								</div>
 							</div>
-							<div class="checkbox-group">
-								<p>If you answered “Yes” to the above, please indicate the name of the organisation.</p>
-								<div class="form-group">
-									<div class="input-group has-validation">
-										<div class="form-floating">
-											<input type="text" class="form-control" id="floatingInput" placeholder="Acme Innovations" />
-											<label for="floatingInput">Name of organisation</label>
-										</div>
-										<div class="invalid-feedback">This field is mandatory as you selected "Yes".</div>
+							<div class="floating-label yesField">
+								<div class="form-field border-normal" onclick="selectInputField('nationalprogramme')">
+									<div>
+										<label for="nationalprogramme">Indicate the name of the National Programme and Implementation Agency (IA)</label>
+									</div>
+									<div>
+										<input type="textarea" id="nationalprogramme" name="nationalprogramme" placeholder="National Programme and Implementation Agency (IA)" data-validation="required" data-error-message="This field is required for the selection of &ldquo;Yes&rdquo;" onblur="removeFocusClass('nationalprogramme'); validateFormField('nationalprogramme')" onfocus="addFocusClass('nationalprogramme')" />
 									</div>
 								</div>
+								<span id="nationalprogramme-error" class="error-message"></span>
 							</div>
 						</div>
-						<div class="form-control para-group">
+
+						<div class="flow-a form-control para-group">
+							<div class="checkbox-group">
+								<h3 style="text-transform: none">Project Details</h3>
+							</div>
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('nationality')">
+									<div>
+										<label class="required" for="nationality">Project title</label>
+									</div>
+									<div>
+										<input type="textarea" id="nationality" name="nationality" placeholder="Research for micro organisms" data-validation="required" data-error-message="" onblur="removeFocusClass('nationality'); validateFormField('nationality')" onfocus="addFocusClass('nationality')" />
+									</div>
+								</div>
+								<span id="nationality-error" class="error-message"></span>
+							</div>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('userid')">
+									<div>
+										<label class="required" for="userid">Project description</label>
+									</div>
+									<div>
+										<input type="textarea" id="userid" name="userid" placeholder="Project description" data-validation="required userid" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
+									</div>
+								</div>
+								<span id="userid-error" class="error-message"></span>
+							</div>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('userid')">
+									<div>
+										<label for="userid">Project duration (include start date and end date, if possible)</label>
+									</div>
+									<div>
+										<input type="textarea" id="userid" name="userid" placeholder="DD/MM/YYYY - DD/MM/YYYY" data-validation="required userid" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
+									</div>
+								</div>
+								<span id="userid-error" class="error-message"></span>
+							</div>
+						</div>
+
+						<div class="flow-a form-control para-group">
 							<div class="checkbox-group">
 								<h3 style="text-transform: none">Utilisation Projection</h3>
+								<p>This is an indication of the compute resources required which will be subjected to approval. You may leave blank if unsure.</p>
 							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Project title" />
-									<label for="floatingInput" class="required">Project title</label>
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('nationality')">
+									<div>
+										<label for="nationality">Estimated CPU core hours required</label>
+									</div>
+									<div>
+										<input type="textarea" id="nationality" name="nationality" placeholder="CPU core hours" data-validation="" data-error-message="" onblur="removeFocusClass('nationality'); validateFormField('nationality')" onfocus="addFocusClass('nationality')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="nationality-error" class="error-message"></span>
 							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="10 CPU/GPU-hours" />
-									<label for="floatingInput" class="required">Estimated computational (CPU/GPU-hours) requirements?</label>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('userid')">
+									<div>
+										<label for="userid">Estimated GPU card hours required</label>
+									</div>
+									<div>
+										<input type="textarea" id="userid" name="userid" placeholder="GPU card hours" data-validation="" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="userid-error" class="error-message"></span>
 							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="10 GB" />
-									<label for="floatingInput" class="required">Estimated storage (GB) requirements?</label>
+
+							<div class="floating-label">
+								<div class="form-field border-normal" onclick="selectInputField('userid')">
+									<div>
+										<label for="userid">Estimated storage (GB) required</label>
+									</div>
+									<div>
+										<input type="textarea" id="userid" name="userid" placeholder="Storage (GB)" data-validation="" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
+									</div>
 								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
-							</div>
-							<div class="input-group has-validation">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="floatingInput" placeholder="Project description" />
-									<label for="floatingInput" class="required">Project description</label>
-								</div>
-								<div class="invalid-feedback">This is a mandatory field.</div>
+								<span id="userid-error" class="error-message"></span>
 							</div>
 						</div>
-						<div class="form-control para-group">
-							<p>If you are part of a collaboration with existing users from NSCC Stakeholder organisations i.e. A*STAR, NTU, NUS and SUTD, please download the sponsorship form from <a href="https://www.nscc.sg/" target="_blank">LINK TBA by JX</a> and upload the completed form here.</p>
+
+						<div class="flow-b form-control para-group hide-start">
+							<div class="checkbox-group">
+								<h3 style="text-transform: none">Collaboration with Stakeholders (A*STAR, NTU, NUS, SUTD)</h3>
+								<p>
+									You have indicated that you are collaborating with our stakeholders. <br /><br />
+									For creation of a user account for an external collaborator (i.e., not part of the stakeholder organisations), we will need an endorsement from either the project owner or the principal investigator (PI) of an existing NSCC project. <br /><br />
+									The project owner/PI will act as the sponsor for the created account and be responsible for the account created. Your account must be added to at least one ongoing project that belongs to the sponsor. <br /><br />
+									Please provide the following information for your account sponsor:
+								</p>
+								<ul style="margin: 0">
+									<li>First Name</li>
+									<li>Last Name</li>
+									<li>Official Email</li>
+									<li>Designation</li>
+									<li>Org/Dept</li>
+									<li>Contact No.</li>
+									<li>Nationality</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="flow-b form-control para-group">
+							<div class="checkbox-group">
+								<p>Please upload the endorsement email from your PI with the following acknowledgements:</p>
+								<ol style="margin: 0">
+									<li>To act as the sponsor for the creation of your account.</li>
+									<li>To add you to their project, specifying the project ID.</li>
+								</ol>
+							</div>
 
 							<div class="form-group">
 								<div class="input-group has-validation">
@@ -307,9 +488,9 @@
 								<h4>Continue</h4>
 							</button>
 						</div>
-						<line></line>
+						<line class="hide-md"></line>
 					</div>
-					<div class="step-4 step-content" id="step-4">
+					<div class="flow-c step-4 step-content" id="step-4">
 						<h3>Policy Acceptance</h3>
 						<div class="form-control para-group">
 							<p>
@@ -318,29 +499,23 @@
 								By submitting this form, you are accepting and consenting to:
 							</p>
 
-							<div class="step-content">
-								<h3 style="text-transform: none" class="required">NSCC's Privacy Statement</h3>
-								<div class="input-group has-validation">
-									<div class="form-control" id="floatingInput" style="padding: 16px">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" value="" id="checkprivacystatement" />
-											<label class="form-check-label" for="checkprivacystatement" style="font-size: 14px"><span>I acknowledge that I have read and agree to the terms in the <a href="https://www.nscc.sg/privacy-statement" target="_blank">Privacy Statement</a>.</span></label>
-										</div>
-									</div>
-									<div class="invalid-feedback">Please check the box to confirm that you accept the terms and conditions and privacy policy.</div>
+							<h3 style="text-transform: none">NSCC's Privacy Statement</h3>
+							<div class="checkbox-group">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="researchdomain1" />
+									<label class="form-check-label" for="researchdomain1" style="font-size: 14px">
+										<span class="required">I acknowledge that I have read and agree to the terms in the <a href="https://www.nscc.sg/privacy-statement" target="_blank">Privacy Statement</a>.</span>
+									</label>
 								</div>
 							</div>
 
-							<div class="step-content">
-								<h3 style="text-transform: none" class="required">NSCC's Acceptable Use Policy</h3>
-								<div class="input-group has-validation">
-									<div class="form-control" id="floatingInput" placeholder="sarah.tan@acmeinnovations.com" style="padding: 16px">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" value="" id="checkaup" />
-											<label class="form-check-label" for="checkaup" style="font-size: 14px"><span>I agree to NSCC's <a href="https://help.nscc.sg/aup/" target="_blank">Acceptable Use Policy</a>.</span></label>
-										</div>
-									</div>
-									<div class="invalid-feedback">Please check the box to confirm that you accept the terms and conditions and privacy policy.</div>
+							<h3 style="text-transform: none">NSCC's Acceptable Use Policy</h3>
+							<div class="checkbox-group">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="researchdomain1" />
+									<label class="form-check-label" for="researchdomain1" style="font-size: 14px">
+										<span class="required">I agree to NSCC's <a href="https://help.nscc.sg/aup/" target="_blank">Acceptable Use Policy</a>.</span>
+									</label>
 								</div>
 							</div>
 
@@ -385,6 +560,8 @@
 			</div>
 		</div>
 
+		<script></script>
+
 		<script src="js/custom.js"></script>
 
 		<!-- bootstrap core js -->
@@ -397,5 +574,4 @@
 		<!-- core theme js -->
 		<script src="js/scripts.js"></script>
 	</body>
-
 </html>

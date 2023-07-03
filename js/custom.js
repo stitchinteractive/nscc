@@ -24,13 +24,11 @@ const elements = document.getElementsByClassName("required");
 for (let i = 0; i < elements.length; i++) {
 	const element = elements[i];
 
-	// Create a new <span> element for the red asterisk
-	const asterisk = document.createElement("span");
-	asterisk.style.color = "var(--color-error-red)";
-	asterisk.innerHTML = "*";
+	// Create a new HTML string for the red asterisk
+	const asteriskHTML = '<span style="color: #f4333d; font-size: 12px">*</span>';
 
-	// Insert the <span> element after the existing text
-	element.appendChild(asterisk);
+	// Insert the HTML string after the existing text
+	element.innerHTML += asteriskHTML;
 }
 
 function updateState(currentState) {
@@ -342,6 +340,8 @@ function removeProgressBar(bar) {
 	}
 }
 function setProgressBar(bar) {
+	window.scroll(0, 0); // jump page to top
+
 	// Get the progress bar element
 	const progressBar1 = document.getElementById("progress-line-one");
 	const progressBar2 = document.getElementById("progress-line-two");
@@ -355,5 +355,204 @@ function setProgressBar(bar) {
 	}
 	if (bar === 3) {
 		progressBar3.style.width = 100 + "%";
+	}
+}
+
+// additional validations 2.0
+
+function selectInputField(inputId) {
+	var inputField = document.getElementById(inputId);
+	inputField.focus();
+	addFocusClass(inputId);
+}
+
+function addFocusClass(inputId) {
+	var formField = document.getElementById(inputId).parentNode.parentNode;
+	formField.classList.add("border-focus");
+}
+
+function removeFocusClass(inputId) {
+	var formField = document.getElementById(inputId).parentNode.parentNode;
+	formField.classList.remove("border-focus");
+}
+
+function validateFormField(inputId) {
+	var inputField = document.getElementById(inputId);
+	var errorMessage = document.getElementById(inputId + "-error");
+	var formField = inputField.parentNode.parentNode;
+	var value = inputField.value.trim();
+	var validationType = inputField.dataset.validation;
+	var customErrorMessage = inputField.dataset.errorMessage;
+
+	if (validationType.includes("required")) {
+		if (value === "") {
+			errorMessage.textContent = customErrorMessage || "This field is required";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+		} else {
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+			inputField.classList.remove("error");
+			formField.classList.remove("error-field");
+		}
+	}
+
+	if (validationType.includes("userid")) {
+		if (value === "") {
+			errorMessage.textContent = customErrorMessage || "This field is required";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+		} else if (value.length > 8) {
+			errorMessage.textContent = "User ID must be 8 characters or less.";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+		} else {
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+			inputField.classList.remove("error");
+			formField.classList.remove("error-field");
+		}
+	}
+
+	if (validationType.includes("email")) {
+		if (value === "") {
+			errorMessage.textContent = customErrorMessage || "This field is required";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+		} else if (value.includes("@gmail.com") || value.includes("@yahoo.com") || value.includes("@hotmail.com") || value.includes("@outlook.com") || value.includes("@live.com")) {
+			errorMessage.textContent = customErrorMessage || "Please enter a valid email address that is not from a private email domain (e.g. gmail.com, yahoo.com)";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+		} else {
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+			inputField.classList.remove("error");
+			formField.classList.remove("error-field");
+		}
+	}
+
+	// Add more validation types as needed
+}
+
+// new javascript 3.0
+
+function handleRadioChange(selection) {
+	// Get all elements with class name "flow-a", "flow-b", and "flow-c"
+	var flowAElements = document.getElementsByClassName("flow-a");
+	var flowBElements = document.getElementsByClassName("flow-b");
+	var flowCElements = document.getElementsByClassName("flow-c");
+	var optionBElements = document.getElementsByClassName("option-b");
+	var optionCElements = document.getElementsByClassName("option-c");
+
+	if (selection === "A") {
+		console.log("Stakeholder collaborators selected");
+		// Perform actions specific to option A
+		for (var i = 0; i < flowAElements.length; i++) {
+			flowAElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < flowBElements.length; i++) {
+			flowBElements[i].classList.add("flow-block");
+		}
+
+		for (var i = 0; i < flowCElements.length; i++) {
+			flowCElements[i].classList.add("flow-block");
+		}
+		for (var i = 0; i < optionBElements.length; i++) {
+			optionBElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < optionCElements.length; i++) {
+			optionCElements[i].classList.remove("flow-block");
+		}
+	} else if (selection === "B") {
+		// Add the "flow-block" class and change the display property
+		for (var i = 0; i < flowAElements.length; i++) {
+			flowAElements[i].classList.add("flow-block");
+		}
+
+		for (var i = 0; i < flowBElements.length; i++) {
+			flowBElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < flowCElements.length; i++) {
+			flowCElements[i].classList.add("flow-block");
+		}
+
+		for (var i = 0; i < optionBElements.length; i++) {
+			optionBElements[i].classList.add("flow-block");
+		}
+
+		for (var i = 0; i < optionCElements.length; i++) {
+			optionCElements[i].classList.remove("flow-block");
+		}
+	} else if (selection === "C") {
+		console.log("Other research collaborators selected");
+		// Perform actions specific to option C
+		for (var i = 0; i < flowAElements.length; i++) {
+			flowAElements[i].classList.add("flow-block");
+		}
+
+		for (var i = 0; i < flowBElements.length; i++) {
+			flowBElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < flowCElements.length; i++) {
+			flowCElements[i].classList.add("flow-block");
+		}
+
+		for (var i = 0; i < optionBElements.length; i++) {
+			optionBElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < optionCElements.length; i++) {
+			optionCElements[i].classList.add("flow-block");
+		}
+	} else if (selection === "D") {
+		console.log("No collaborators selected");
+		// Perform actions specific to option D
+		for (var i = 0; i < flowAElements.length; i++) {
+			flowAElements[i].classList.add("flow-block");
+		}
+
+		for (var i = 0; i < flowBElements.length; i++) {
+			flowBElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < flowCElements.length; i++) {
+			flowCElements[i].classList.add("flow-block");
+		}
+		for (var i = 0; i < optionBElements.length; i++) {
+			optionBElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < optionCElements.length; i++) {
+			optionCElements[i].classList.remove("flow-block");
+		}
+	} else {
+		console.log("Invalid selection");
+	}
+}
+
+function noyesChange(selection) {
+	// Get all elements with class name "flow-a", "flow-b", and "flow-c"
+	var yesField = document.getElementsByClassName("yesField");
+
+	if (selection === "A") {
+		// Perform actions specific to option A
+		for (var i = 0; i < yesField.length; i++) {
+			yesField[i].classList.remove("flow-block");
+		}
+	} else if (selection === "B") {
+		for (var i = 0; i < yesField.length; i++) {
+			yesField[i].classList.add("flow-block");
+		}
+	} else {
+		console.log("Invalid selection");
 	}
 }
