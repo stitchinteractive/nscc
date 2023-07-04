@@ -18,13 +18,16 @@ let currentState = 0; // Initialize current state to state 0
 let mobileState = 0; // Initialize current state to state 0
 let flowState = 0; // Initialize current state to state 0
 let radioState = 0; // Initialize current state to state 0
+let checkState = 0; // Initialize current state to state 0
+
+let submitState = 0; // Initialize current state to state 0
+
+let hasError = 0; // Initialize current state to state 0
 
 window.onload = peristentState;
 
-function peristentState() { 
+function peristentState() {
 	// persistentState checks the state of selection and onload sets accordingly
-	console.log(flowState);
-	console.log(radioState);
 
 	let radio1A = document.getElementById("researchcollaboration1");
 	let radio1B = document.getElementById("researchcollaboration2");
@@ -34,18 +37,17 @@ function peristentState() {
 	let radio2A = document.getElementById("nationalprogrammeradio1");
 	let radio2B = document.getElementById("nationalprogrammeradio2");
 
+	let check1A = document.getElementById("researchdomain5");
+
 	if (radio1A.checked) {
 		handleRadioChange("A");
 	}
-
 	if (radio1B.checked) {
 		handleRadioChange("B");
 	}
-
 	if (radio1C.checked) {
 		handleRadioChange("C");
 	}
-
 	if (radio1D.checked) {
 		handleRadioChange("D");
 	}
@@ -53,9 +55,19 @@ function peristentState() {
 	if (radio2A.checked) {
 		noyesChange("A");
 	}
+	if (radio2B.checked) {
+		noyesChange("B");
+	}
 
 	if (radio2B.checked) {
 		noyesChange("B");
+	}
+	if (radio2B.checked) {
+		noyesChange("B");
+	}
+
+	if (check1A.checked) {
+		handleCheckboxChange();
 	}
 }
 
@@ -143,7 +155,7 @@ function updateState(currentState) {
 	if (currentState === 5) {
 		var flowCElements = document.getElementsByClassName("flow-c");
 
-		if (flowState === 1 || flowState === 2) {
+		if (flowState === 1 || flowState === 2 || flowState === 3 || flowState === 4) {
 			for (var i = 0; i < flowCElements.length; i++) {
 				flowCElements[i].classList.add("flow-block");
 			}
@@ -166,7 +178,7 @@ function updateState(currentState) {
 	if (currentState === 6) {
 		var flowCElements = document.getElementsByClassName("flow-c");
 
-		if (flowState === 1 || flowState === 2) {
+		if (flowState === 1 || flowState === 2 || flowState === 3 || flowState === 4) {
 			for (var i = 0; i < flowCElements.length; i++) {
 				flowCElements[i].classList.add("flow-block");
 			}
@@ -472,6 +484,7 @@ function validateFormField(inputId) {
 			errorMessage.classList.add("error-message-show");
 			inputField.classList.add("error");
 			formField.classList.add("error-field");
+			hasError = 1;
 		} else {
 			errorMessage.textContent = "";
 			errorMessage.classList.remove("error-message-show");
@@ -486,11 +499,13 @@ function validateFormField(inputId) {
 			errorMessage.classList.add("error-message-show");
 			inputField.classList.add("error");
 			formField.classList.add("error-field");
+			hasError = 1;
 		} else if (value.length > 8) {
 			errorMessage.textContent = "User ID must be 8 characters or less.";
 			errorMessage.classList.add("error-message-show");
 			inputField.classList.add("error");
 			formField.classList.add("error-field");
+			hasError = 1;
 		} else {
 			errorMessage.textContent = "";
 			errorMessage.classList.remove("error-message-show");
@@ -505,11 +520,13 @@ function validateFormField(inputId) {
 			errorMessage.classList.add("error-message-show");
 			inputField.classList.add("error");
 			formField.classList.add("error-field");
+			hasError = 1;
 		} else if (value.includes("@gmail.com") || value.includes("@yahoo.com") || value.includes("@hotmail.com") || value.includes("@outlook.com") || value.includes("@live.com")) {
 			errorMessage.textContent = customErrorMessage || "Please enter a valid email address that is not from a private email domain (e.g. gmail.com, yahoo.com)";
 			errorMessage.classList.add("error-message-show");
 			inputField.classList.add("error");
 			formField.classList.add("error-field");
+			hasError = 1;
 		} else {
 			errorMessage.textContent = "";
 			errorMessage.classList.remove("error-message-show");
@@ -518,10 +535,22 @@ function validateFormField(inputId) {
 		}
 	}
 
+	if (validationType.includes("checkbox")) {
+		let inputIdcheckbox = document.getElementById(inputId);
+
+		if (inputIdcheckbox.checked) {
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+		} else {
+			errorMessage.textContent = customErrorMessage || "This field is required";
+			errorMessage.classList.add("error-message-show");
+
+			hasError = 1;
+		}
+	}
+
 	// Add more validation types as needed
 }
-
-// new javascript 3.0
 
 function handleRadioChange(selection) {
 	// Get all elements with class name "flow-a", "flow-b", and "flow-c"
@@ -534,7 +563,6 @@ function handleRadioChange(selection) {
 	if (selection === "A") {
 		flowState = 2;
 
-		console.log("Stakeholder collaborators selected");
 		// Perform actions specific to option A
 		for (var i = 0; i < flowAElements.length; i++) {
 			flowAElements[i].classList.remove("flow-block");
@@ -590,9 +618,8 @@ function handleRadioChange(selection) {
 			optionCElements[i].classList.remove("flow-block");
 		}
 	} else if (selection === "C") {
-		flowState = 1;
+		flowState = 3;
 
-		console.log("Other research collaborators selected");
 		// Perform actions specific to option C
 		for (var i = 0; i < flowAElements.length; i++) {
 			flowAElements[i].classList.add("flow-block");
@@ -620,9 +647,8 @@ function handleRadioChange(selection) {
 			optionCElements[i].classList.add("flow-block");
 		}
 	} else if (selection === "D") {
-		flowState = 1;
+		flowState = 4;
 
-		console.log("No collaborators selected");
 		// Perform actions specific to option D
 		for (var i = 0; i < flowAElements.length; i++) {
 			flowAElements[i].classList.add("flow-block");
@@ -675,21 +701,6 @@ function noyesChange(selection) {
 	}
 }
 
-function checkCheckedCheckboxes() {
-	// Get all the checkbox elements
-	const checkboxes = document.querySelectorAll(".form-check-input");
-
-	// Loop through each checkbox and check if it is checked
-	checkboxes.forEach((checkbox) => {
-		if (checkbox.checked) {
-			console.log(`Checkbox ${checkbox.id} is checked.`);
-		}
-	});
-}
-
-// Run the function when the page finishes loading
-window.addEventListener("load", checkCheckedCheckboxes);
-
 // Get the checkboxes and the "Other domains" input field
 const othersCheckbox = document.getElementById("researchdomain5");
 const otherDomainsField = document.querySelector(".flow-a .floating-label");
@@ -701,7 +712,196 @@ othersCheckbox.addEventListener("change", handleCheckboxChange);
 function handleCheckboxChange() {
 	if (othersCheckbox.checked) {
 		otherDomainsField.style.display = "block";
+		checkState = 1;
 	} else {
 		otherDomainsField.style.display = "none";
+		checkState = 0;
+	}
+}
+
+// Get the submit button
+const submitButton = document.getElementById("submit-button");
+
+// Add event listener to the submit button
+submitButton.addEventListener("click", validateFormFields);
+
+// Function to validate all form fields
+function validateFormFields() {
+	// Get all form fields
+	const formFields = document.querySelectorAll("input[data-validation]");
+
+	let firstError = 0;
+
+	submitState = 0;
+	hasError = 0;
+
+	// Iterate through the form fields
+	formFields.forEach((field) => {
+		const inputId = field.id;
+		const dataValidation = field.getAttribute("data-validation");
+		let validateField = 0;
+
+		if (dataValidation.includes("flow-c") && flowState === 1) {
+			validateField = 1;
+		} else if (dataValidation.includes("flow-d") && flowState === 3) {
+			validateField = 1;
+		} else if (dataValidation.includes("flow-b") && flowState === 2) {
+			validateField = 1;
+		} else if (dataValidation.includes("flow-a") && (flowState === 1 || flowState === 3 || flowState === 4)) {
+			validateField = 1;
+		} else if (dataValidation.includes("flow-e") && checkState === 1) {
+			validateField = 1;
+		} else if (dataValidation.includes("flow-f") && radioState === 2) {
+			validateField = 1;
+		} else if (dataValidation.includes("flow-g")) {
+			validateField = 1;
+		} else {
+			validateField = 0;
+		}
+
+		if (validateField === 1) {
+			validateFormField(inputId);
+
+			if (firstError === 0 && hasError === 1) {
+				console.log(firstError);
+				if (viewportWidth <= 768) {
+					if (dataValidation.includes("step-1")) {
+						mobileState = 1;
+						updateState(1);
+					} else if (dataValidation.includes("step-2")) {
+						mobileState = 2;
+						updateState(2);
+					} else if (dataValidation.includes("step-3")) {
+						mobileState = 3;
+						updateState(3);
+					} else if (dataValidation.includes("step-4")) {
+						mobileState = 4;
+						updateState(4);
+					} else {
+						console.log("Focus no step set");
+					}
+				}
+
+				let inputField = document.getElementById(inputId);
+				inputField.focus();
+				firstError = 1;
+				console.log(firstError);
+			}
+		}
+	});
+
+	if (flowState === 1 || flowState === 3 || flowState === 4) {
+		// Get the radio buttons
+		const radioButtons = document.getElementsByName("nationalprogrammeradio");
+
+		// Function to check if any radio button is selected
+		function isRadioButtonSelected() {
+			for (let i = 0; i < radioButtons.length; i++) {
+				if (radioButtons[i].checked) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		var errorMessage = document.getElementById("nationalprogrammeradio-error");
+
+		// Example usage
+		if (isRadioButtonSelected()) {
+			// At least one radio button is selected
+			console.log("A radio button is selected.");
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+		} else {
+			// No radio button is selected
+			errorMessage.textContent = "Please select an option above";
+			errorMessage.classList.add("error-message-show");
+
+			if (firstError === 0) {
+				if (viewportWidth <= 768) {
+					mobileState = 3;
+					updateState(3);
+				}
+
+				let inputField = document.getElementById("nationalprogrammeradio1");
+				inputField.focus();
+				firstError = 1;
+			}
+
+			hasError = 1;
+		}
+
+		// Get all the checkboxes
+		const checkboxes = document.querySelectorAll(".checkbox-researchdomain input[type='checkbox']");
+
+		// Function to check if at least one checkbox is selected
+		function isCheckboxSelected() {
+			for (let i = 0; i < checkboxes.length; i++) {
+				if (checkboxes[i].checked) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		var errorMessage = document.getElementById("researchdomaincheckbox-error");
+
+		// Example usage
+		if (isCheckboxSelected()) {
+			// At least one checkbox is selected
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+		} else {
+			// No checkbox is selected
+			errorMessage.textContent = "Please select an option above";
+			errorMessage.classList.add("error-message-show");
+
+			if (firstError === 0) {
+				if (viewportWidth <= 768) {
+					mobileState = 3;
+					updateState(3);
+				}
+
+				let inputField = document.getElementById("researchdomain1");
+				inputField.focus();
+				firstError = 1;
+			}
+
+			hasError = 1;
+		}
+
+		// Example usage
+		const recaptchaError = document.getElementById("recaptcha-error");
+
+		// Function to validate the reCAPTCHA
+		const recaptchaResponse = grecaptcha.getResponse();
+
+		if (recaptchaResponse !== "") {
+			// reCAPTCHA was successful
+			recaptchaError.textContent = "";
+			recaptchaError.classList.remove("error-message-show");
+
+			// You can proceed with your form submission or any other action
+			console.log("reCAPTCHA was successful");
+		} else {
+			// reCAPTCHA was not successful
+			recaptchaError.textContent = "Please complete the reCAPTCHA";
+			recaptchaError.classList.add("error-message-show");
+
+			console.log("reCAPTCHA was not successful");
+
+			hasError = 1;
+		}
+	}
+
+	if (hasError === 0) {
+		// Get the modal element
+		const modal = document.getElementById("exampleModal");
+
+		// Create a Bootstrap modal instance
+		const modalInstance = new bootstrap.Modal(modal);
+
+		// Open the modal
+		modalInstance.show();
 	}
 }
