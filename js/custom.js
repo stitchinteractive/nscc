@@ -16,6 +16,48 @@ const back3Btn = document.getElementById("back3");
 
 let currentState = 0; // Initialize current state to state 0
 let mobileState = 0; // Initialize current state to state 0
+let flowState = 0; // Initialize current state to state 0
+let radioState = 0; // Initialize current state to state 0
+
+window.onload = peristentState;
+
+function peristentState() { 
+	// persistentState checks the state of selection and onload sets accordingly
+	console.log(flowState);
+	console.log(radioState);
+
+	let radio1A = document.getElementById("researchcollaboration1");
+	let radio1B = document.getElementById("researchcollaboration2");
+	let radio1C = document.getElementById("researchcollaboration3");
+	let radio1D = document.getElementById("researchcollaboration4");
+
+	let radio2A = document.getElementById("nationalprogrammeradio1");
+	let radio2B = document.getElementById("nationalprogrammeradio2");
+
+	if (radio1A.checked) {
+		handleRadioChange("A");
+	}
+
+	if (radio1B.checked) {
+		handleRadioChange("B");
+	}
+
+	if (radio1C.checked) {
+		handleRadioChange("C");
+	}
+
+	if (radio1D.checked) {
+		handleRadioChange("D");
+	}
+
+	if (radio2A.checked) {
+		noyesChange("A");
+	}
+
+	if (radio2B.checked) {
+		noyesChange("B");
+	}
+}
 
 // Select all elements with the class name "required"
 const elements = document.getElementsByClassName("required");
@@ -38,6 +80,12 @@ function updateState(currentState) {
 		formContent.style.display = "none";
 	}
 
+	var flowCElements = document.getElementsByClassName("flow-c");
+	for (var i = 0; i < flowCElements.length; i++) {
+		flowCElements[i].classList.remove("flow-block");
+	}
+
+	// State 1 - SM Mobile Viewport, Dot 1
 	if (currentState === 1) {
 		startContent.style.display = "none";
 		formContent.style.display = "flex";
@@ -49,6 +97,7 @@ function updateState(currentState) {
 		setProgressState(1);
 	}
 
+	// State 2 - SM Mobile Viewport, Dot 2
 	if (currentState === 2) {
 		startContent.style.display = "none";
 		formContent.style.display = "flex";
@@ -59,6 +108,8 @@ function updateState(currentState) {
 		step4.style.display = "none";
 		setProgressState(2);
 	}
+
+	// State 3 - SM Mobile Viewport, Dot 3
 
 	if (currentState === 3) {
 		startContent.style.display = "none";
@@ -71,7 +122,12 @@ function updateState(currentState) {
 		setProgressState(3);
 	}
 
+	// State 4 - SM Mobile Viewport, Dot 4
 	if (currentState === 4) {
+		var flowCElements = document.getElementsByClassName("flow-c");
+		for (var i = 0; i < flowCElements.length; i++) {
+			flowCElements[i].classList.add("flow-block");
+		}
 		startContent.style.display = "none";
 		formContent.style.display = "flex";
 		progressBar.style.display = "flex";
@@ -82,7 +138,20 @@ function updateState(currentState) {
 		setProgressState(4);
 	}
 
+	// State 5 - MD Tablet Viewport
+
 	if (currentState === 5) {
+		var flowCElements = document.getElementsByClassName("flow-c");
+
+		if (flowState === 1 || flowState === 2) {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.add("flow-block");
+			}
+		} else {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.remove("flow-block");
+			}
+		}
 		startContent.style.display = "none";
 		formContent.style.display = "flex";
 		progressBar.style.display = "flex";
@@ -92,7 +161,20 @@ function updateState(currentState) {
 		step4.style.display = "flex";
 	}
 
+	// State 6 - LG Desktop Viewport
+
 	if (currentState === 6) {
+		var flowCElements = document.getElementsByClassName("flow-c");
+
+		if (flowState === 1 || flowState === 2) {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.add("flow-block");
+			}
+		} else {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.remove("flow-block");
+			}
+		}
 		startContent.style.display = "flex";
 		formContent.style.display = "flex";
 		progressBar.style.display = "flex";
@@ -450,6 +532,8 @@ function handleRadioChange(selection) {
 	var optionCElements = document.getElementsByClassName("option-c");
 
 	if (selection === "A") {
+		flowState = 2;
+
 		console.log("Stakeholder collaborators selected");
 		// Perform actions specific to option A
 		for (var i = 0; i < flowAElements.length; i++) {
@@ -460,8 +544,14 @@ function handleRadioChange(selection) {
 			flowBElements[i].classList.add("flow-block");
 		}
 
-		for (var i = 0; i < flowCElements.length; i++) {
-			flowCElements[i].classList.add("flow-block");
+		if (mobileState === 3) {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.remove("flow-block");
+			}
+		} else {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.add("flow-block");
+			}
 		}
 		for (var i = 0; i < optionBElements.length; i++) {
 			optionBElements[i].classList.remove("flow-block");
@@ -471,6 +561,8 @@ function handleRadioChange(selection) {
 			optionCElements[i].classList.remove("flow-block");
 		}
 	} else if (selection === "B") {
+		flowState = 1;
+
 		// Add the "flow-block" class and change the display property
 		for (var i = 0; i < flowAElements.length; i++) {
 			flowAElements[i].classList.add("flow-block");
@@ -480,8 +572,14 @@ function handleRadioChange(selection) {
 			flowBElements[i].classList.remove("flow-block");
 		}
 
-		for (var i = 0; i < flowCElements.length; i++) {
-			flowCElements[i].classList.add("flow-block");
+		if (mobileState === 3) {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.remove("flow-block");
+			}
+		} else {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.add("flow-block");
+			}
 		}
 
 		for (var i = 0; i < optionBElements.length; i++) {
@@ -492,6 +590,8 @@ function handleRadioChange(selection) {
 			optionCElements[i].classList.remove("flow-block");
 		}
 	} else if (selection === "C") {
+		flowState = 1;
+
 		console.log("Other research collaborators selected");
 		// Perform actions specific to option C
 		for (var i = 0; i < flowAElements.length; i++) {
@@ -502,8 +602,14 @@ function handleRadioChange(selection) {
 			flowBElements[i].classList.remove("flow-block");
 		}
 
-		for (var i = 0; i < flowCElements.length; i++) {
-			flowCElements[i].classList.add("flow-block");
+		if (mobileState === 3) {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.remove("flow-block");
+			}
+		} else {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.add("flow-block");
+			}
 		}
 
 		for (var i = 0; i < optionBElements.length; i++) {
@@ -514,6 +620,8 @@ function handleRadioChange(selection) {
 			optionCElements[i].classList.add("flow-block");
 		}
 	} else if (selection === "D") {
+		flowState = 1;
+
 		console.log("No collaborators selected");
 		// Perform actions specific to option D
 		for (var i = 0; i < flowAElements.length; i++) {
@@ -524,8 +632,14 @@ function handleRadioChange(selection) {
 			flowBElements[i].classList.remove("flow-block");
 		}
 
-		for (var i = 0; i < flowCElements.length; i++) {
-			flowCElements[i].classList.add("flow-block");
+		if (mobileState === 3) {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.remove("flow-block");
+			}
+		} else {
+			for (var i = 0; i < flowCElements.length; i++) {
+				flowCElements[i].classList.add("flow-block");
+			}
 		}
 		for (var i = 0; i < optionBElements.length; i++) {
 			optionBElements[i].classList.remove("flow-block");
@@ -544,15 +658,50 @@ function noyesChange(selection) {
 	var yesField = document.getElementsByClassName("yesField");
 
 	if (selection === "A") {
+		radioState = 1;
+
 		// Perform actions specific to option A
 		for (var i = 0; i < yesField.length; i++) {
 			yesField[i].classList.remove("flow-block");
 		}
 	} else if (selection === "B") {
+		radioState = 2;
+
 		for (var i = 0; i < yesField.length; i++) {
 			yesField[i].classList.add("flow-block");
 		}
 	} else {
 		console.log("Invalid selection");
+	}
+}
+
+function checkCheckedCheckboxes() {
+	// Get all the checkbox elements
+	const checkboxes = document.querySelectorAll(".form-check-input");
+
+	// Loop through each checkbox and check if it is checked
+	checkboxes.forEach((checkbox) => {
+		if (checkbox.checked) {
+			console.log(`Checkbox ${checkbox.id} is checked.`);
+		}
+	});
+}
+
+// Run the function when the page finishes loading
+window.addEventListener("load", checkCheckedCheckboxes);
+
+// Get the checkboxes and the "Other domains" input field
+const othersCheckbox = document.getElementById("researchdomain5");
+const otherDomainsField = document.querySelector(".flow-a .floating-label");
+
+// Add event listener to the checkbox
+othersCheckbox.addEventListener("change", handleCheckboxChange);
+
+// Function to handle checkbox change
+function handleCheckboxChange() {
+	if (othersCheckbox.checked) {
+		otherDomainsField.style.display = "block";
+	} else {
+		otherDomainsField.style.display = "none";
 	}
 }
