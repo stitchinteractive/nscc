@@ -26,6 +26,13 @@ let hasError = 0; // Initialize current state to state 0
 
 window.onload = peristentState;
 
+/*
+Notes for validation system:
+For Checkbox and Radio validation focus priority is last
+No file upload validation
+No recaptcha validation
+*/
+
 function peristentState() {
 	// persistentState checks the state of selection and onload sets accordingly
 
@@ -869,29 +876,6 @@ function validateFormFields() {
 
 			hasError = 1;
 		}
-
-		// Example usage
-		const recaptchaError = document.getElementById("recaptcha-error");
-
-		// Function to validate the reCAPTCHA
-		const recaptchaResponse = grecaptcha.getResponse();
-
-		if (recaptchaResponse !== "") {
-			// reCAPTCHA was successful
-			recaptchaError.textContent = "";
-			recaptchaError.classList.remove("error-message-show");
-
-			// You can proceed with your form submission or any other action
-			console.log("reCAPTCHA was successful");
-		} else {
-			// reCAPTCHA was not successful
-			recaptchaError.textContent = "Please complete the reCAPTCHA";
-			recaptchaError.classList.add("error-message-show");
-
-			console.log("reCAPTCHA was not successful");
-
-			hasError = 1;
-		}
 	}
 
 	if (hasError === 0) {
@@ -905,3 +889,30 @@ function validateFormFields() {
 		modalInstance.show();
 	}
 }
+
+/*
+// Unused Recaptcha Validation (does not work)
+
+// Example usage
+const recaptchaError = document.getElementById("recaptcha-error");
+
+// Function to validate the reCAPTCHA
+const recaptchaResponse = grecaptcha.getResponse();
+
+if (recaptchaResponse !== "") {
+	// reCAPTCHA was successful
+	recaptchaError.textContent = "";
+	recaptchaError.classList.remove("error-message-show");
+
+	// You can proceed with your form submission or any other action
+	console.log("reCAPTCHA was successful");
+} else {
+	// reCAPTCHA was not successful
+	recaptchaError.textContent = "Please complete the reCAPTCHA";
+	recaptchaError.classList.add("error-message-show");
+
+	console.log("reCAPTCHA was not successful");
+
+	hasError = 1;
+}
+*/
