@@ -959,7 +959,10 @@ if (recaptchaResponse !== "") {
 const selectElement = document.getElementById("salutation");
 
 // Add event listener for 'change' event
-selectElement.addEventListener("change", function () {
+selectElement.addEventListener("change", changedropdown);
+selectElement.addEventListener("blur", validatedropdown);
+
+function changedropdown() {
 	// Get the selected value
 	const selectedValue = selectElement.value;
 
@@ -971,4 +974,33 @@ selectElement.addEventListener("change", function () {
 		selectElement.classList.remove("selected");
 	}
 	// You can add your code here to handle the change event
-});
+}
+
+function validatedropdown() {
+	const selectElement = document.getElementById("salutation");
+	const dropdowninputField = document.getElementById("salutation");
+	const dropdownformField = document.querySelector(".form-field");
+	const dropdownerrorMessage = document.getElementById("salutation-error");
+
+	// Add event listener for 'change' event
+	// Get the selected value
+	const selectedValue = selectElement.value;
+
+	// Perform an action based on the selected value
+	console.log(selectedValue);
+	if (selectedValue !== "Default") {
+		selectElement.classList.add("selected");
+
+		dropdownerrorMessage.textContent = "";
+		dropdownerrorMessage.classList.remove("error-message-show");
+		dropdowninputField.classList.remove("error");
+		dropdownformField.classList.remove("error-field");
+	} else {
+		selectElement.classList.remove("selected");
+
+		dropdownerrorMessage.textContent = "Please select an option above";
+		dropdownerrorMessage.classList.add("error-message-show");
+		dropdowninputField.classList.add("error");
+		dropdownformField.classList.add("error-field");
+	}
+}
