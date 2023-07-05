@@ -529,7 +529,7 @@ function validateFormField(inputId) {
 			formField.classList.add("error-field");
 			hasError = 1;
 		} else if (value.includes("@gmail.com") || value.includes("@yahoo.com") || value.includes("@hotmail.com") || value.includes("@outlook.com") || value.includes("@live.com")) {
-			errorMessage.textContent = customErrorMessage || "Please enter a valid email address that is not from a private email domain (e.g. gmail.com, yahoo.com)";
+			errorMessage.textContent = customErrorMessage || "Please enter a valid email address that is not from a personal domain. Email accounts ending with gmail.com, yahoo.com, hotmail.com, etc are not allowed.";
 			errorMessage.classList.add("error-message-show");
 			inputField.classList.add("error");
 			formField.classList.add("error-field");
@@ -742,6 +742,45 @@ function validateFormFields() {
 	submitState = 0;
 	hasError = 0;
 
+	const selectElement = document.getElementById("salutation");
+	const dropdowninputField = document.getElementById("salutation");
+	const dropdownformField = document.querySelector(".form-field");
+	const dropdownerrorMessage = document.getElementById("salutation-error");
+
+	// Add event listener for 'change' event
+	// Get the selected value
+	const selectedValue = selectElement.value;
+
+	// Perform an action based on the selected value
+	console.log(selectedValue);
+	if (selectedValue !== "Default") {
+		selectElement.classList.add("selected");
+
+		dropdownerrorMessage.textContent = "";
+		dropdownerrorMessage.classList.remove("error-message-show");
+		dropdowninputField.classList.remove("error");
+		dropdownformField.classList.remove("error-field");
+	} else {
+		selectElement.classList.remove("selected");
+
+		dropdownerrorMessage.textContent = "Please select an option above";
+		dropdownerrorMessage.classList.add("error-message-show");
+		dropdowninputField.classList.add("error");
+		dropdownformField.classList.add("error-field");
+
+		if (firstError === 0) {
+			if (viewportWidth <= 768) {
+				mobileState = 1;
+				updateState(1);
+			}
+
+			selectElement.focus();
+			firstError = 1;
+		}
+
+		hasError = 1;
+	}
+
 	// Iterate through the form fields
 	formFields.forEach((field) => {
 		const inputId = field.id;
@@ -916,3 +955,20 @@ if (recaptchaResponse !== "") {
 	hasError = 1;
 }
 */
+
+const selectElement = document.getElementById("salutation");
+
+// Add event listener for 'change' event
+selectElement.addEventListener("change", function () {
+	// Get the selected value
+	const selectedValue = selectElement.value;
+
+	// Perform an action based on the selected value
+	console.log(selectedValue);
+	if (selectedValue != "Default") {
+		selectElement.classList.add("selected");
+	} else {
+		selectElement.classList.remove("selected");
+	}
+	// You can add your code here to handle the change event
+});

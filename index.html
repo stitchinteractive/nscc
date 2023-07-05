@@ -66,13 +66,18 @@
 
 						<div class="form-group">
 							<div class="floating-label">
-								<div class="form-field border-normal" onclick="selectInputField('salutation')">
+								<div class="form-field border-normal">
 									<div>
 										<label class="required" for="salutation">Salutation</label>
 									</div>
-									<div>
-										<input type="text" id="salutation" name="salutation" placeholder="Mrs" data-validation="required flow-g step-1" data-error-message="" onblur="removeFocusClass('salutation'); validateFormField('salutation')" onfocus="addFocusClass('salutation')" />
-									</div>
+									<select name="salutation" id="salutation" data-validation="">
+										<option value="Default">Select an option</option>
+										<option value="Mr">Mr</option>
+										<option value="Mrs">Mrs</option>
+										<option value="Ms">Ms</option>
+										<option value="Dr">Dr</option>
+										<option value="Prof">Prof</option>
+									</select>
 								</div>
 								<span id="salutation-error" class="error-message"></span>
 							</div>
@@ -83,7 +88,7 @@
 										<label class="required" for="firstname">First name</label>
 									</div>
 									<div>
-										<input type="text" id="firstname" name="firstname" placeholder="Sarah" data-validation="required flow-g step-1" data-error-message="" onblur="removeFocusClass('firstname'); validateFormField('firstname')" onfocus="addFocusClass('firstname')" />
+										<input type="text" id="firstname" name="firstname" placeholder="First name" data-validation="required flow-g step-1" data-error-message="" onblur="removeFocusClass('firstname'); validateFormField('firstname')" onfocus="addFocusClass('firstname')" />
 									</div>
 								</div>
 								<span id="firstname-error" class="error-message"></span>
@@ -95,7 +100,7 @@
 										<label class="required" for="lastname">Last name</label>
 									</div>
 									<div>
-										<input type="text" id="lastname" name="lastname" placeholder="Tan" data-validation="required flow-g step-1" data-error-message="" onblur="removeFocusClass('lastname'); validateFormField('lastname')" onfocus="addFocusClass('lastname')" />
+										<input type="text" id="lastname" name="lastname" placeholder="Last name" data-validation="required flow-g step-1" data-error-message="" onblur="removeFocusClass('lastname'); validateFormField('lastname')" onfocus="addFocusClass('lastname')" />
 									</div>
 								</div>
 								<span id="lastname-error" class="error-message"></span>
@@ -121,7 +126,7 @@
 										<label class="required" for="userid">Preferred NSCC User ID</label>
 									</div>
 									<div>
-										<input type="text" id="userid" name="userid" placeholder="AcmeRD01" data-validation="required flow-g userid step-1" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
+										<input type="text" id="userid" name="userid" placeholder="NSCC0001" data-validation="required flow-g userid step-1" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
 									</div>
 								</div>
 								<span id="userid-error" class="error-message"></span>
@@ -145,7 +150,7 @@
 										<label class="required" for="organisation">Name of Organisation</label>
 									</div>
 									<div>
-										<input type="text" id="organisation" name="organisation" placeholder="Acme Innovations" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('organisation'); validateFormField('organisation')" onfocus="addFocusClass('organisation')" />
+										<input type="text" id="organisation" name="organisation" placeholder="NSCC Singapore" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('organisation'); validateFormField('organisation')" onfocus="addFocusClass('organisation')" />
 									</div>
 								</div>
 								<span id="organisation-error" class="error-message"></span>
@@ -185,7 +190,7 @@
 										<label class="required" for="contact_number">Official contact number</label>
 									</div>
 									<div>
-										<input type="text" id="contact_number" name="contact_number" placeholder="+65 8875 8875" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('contact_number'); validateFormField('contact_number')" onfocus="addFocusClass('contact_number')" />
+										<input type="text" id="contact_number" name="contact_number" placeholder="+65 XXXX XXXX" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('contact_number'); validateFormField('contact_number')" onfocus="addFocusClass('contact_number')" />
 									</div>
 								</div>
 								<span id="contact_number-error" class="error-message"></span>
@@ -197,7 +202,7 @@
 										<label class="required" for="email_address">Official email address</label>
 									</div>
 									<div>
-										<input type="email" id="email_address" name="email_address" placeholder="sarah.tan@acmeinnovations.com" data-validation="required flow-g step-2 email" data-error-message="" onblur="removeFocusClass('email_address'); validateFormField('email_address')" onfocus="addFocusClass('email_address')" />
+										<input type="email" id="email_address" name="email_address" placeholder="johndoe@nscc.sg" data-validation="required flow-g step-2 email" data-error-message="" onblur="removeFocusClass('email_address'); validateFormField('email_address')" onfocus="addFocusClass('email_address')" />
 									</div>
 								</div>
 								<span id="email_address-error" class="error-message"></span>
@@ -224,7 +229,7 @@
 										<label for="projec_id">Project ID (if applicable)</label>
 									</div>
 									<div>
-										<input type="text" id="projec_id" name="projec_id" placeholder="ACME_RD_2023" data-validation="" data-error-message="" onblur="removeFocusClass('projec_id'); validateFormField('projec_id')" onfocus="addFocusClass('projec_id')" />
+										<input type="text" id="projec_id" name="projec_id" placeholder="NSCC_RD_2023" data-validation="" data-error-message="" onblur="removeFocusClass('projec_id'); validateFormField('projec_id')" onfocus="addFocusClass('projec_id')" />
 									</div>
 								</div>
 								<span id="projec_id-error" class="error-message"></span>
@@ -442,7 +447,7 @@
 											<label class="required" for="sponsorfirstname">First name</label>
 										</div>
 										<div>
-											<input type="text" id="sponsorfirstname" name="sponsorfirstname" placeholder="Sarah" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsorfirstname'); validateFormField('sponsorfirstname')" onfocus="addFocusClass('sponsorfirstname')" />
+											<input type="text" id="sponsorfirstname" name="sponsorfirstname" placeholder="John" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsorfirstname'); validateFormField('sponsorfirstname')" onfocus="addFocusClass('sponsorfirstname')" />
 										</div>
 									</div>
 									<span id="sponsorfirstname-error" class="error-message"></span>
@@ -454,7 +459,7 @@
 											<label class="required" for="sponsorlastname">Last name</label>
 										</div>
 										<div>
-											<input type="text" id="sponsorlastname" name="sponsorlastname" placeholder="Tan" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsorlastname'); validateFormField('sponsorlastname')" onfocus="addFocusClass('sponsorlastname')" />
+											<input type="text" id="sponsorlastname" name="sponsorlastname" placeholder="Doe" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsorlastname'); validateFormField('sponsorlastname')" onfocus="addFocusClass('sponsorlastname')" />
 										</div>
 									</div>
 									<span id="sponsorlastname-error" class="error-message"></span>
@@ -479,7 +484,7 @@
 											<label class="required" for="sponsororganisation">Name of Organisation</label>
 										</div>
 										<div>
-											<input type="text" id="sponsororganisation" name="sponsororganisation" placeholder="Acme Innovations" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsororganisation'); validateFormField('sponsororganisation')" onfocus="addFocusClass('sponsororganisation')" />
+											<input type="text" id="sponsororganisation" name="sponsororganisation" placeholder="NSCC Singapore" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsororganisation'); validateFormField('sponsororganisation')" onfocus="addFocusClass('sponsororganisation')" />
 										</div>
 									</div>
 									<span id="sponsororganisation-error" class="error-message"></span>
@@ -519,7 +524,7 @@
 											<label class="required" for="sponsorcontact_number">Official contact number</label>
 										</div>
 										<div>
-											<input type="text" id="sponsorcontact_number" name="sponsorcontact_number" placeholder="+65 8875 8875" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsorcontact_number'); validateFormField('sponsorcontact_number')" onfocus="addFocusClass('sponsorcontact_number')" />
+											<input type="text" id="sponsorcontact_number" name="sponsorcontact_number" placeholder="+65 XXXX XXXX" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsorcontact_number'); validateFormField('sponsorcontact_number')" onfocus="addFocusClass('sponsorcontact_number')" />
 										</div>
 									</div>
 									<span id="sponsorcontact_number-error" class="error-message"></span>
@@ -531,7 +536,7 @@
 											<label class="required" for="sponsoremail_address">Official email address</label>
 										</div>
 										<div>
-											<input type="email" id="sponsoremail_address" name="sponsoremail_address" placeholder="sarah.tan@acmeinnovations.com" data-validation="required flow-b step-3 email" data-error-message="" onblur="removeFocusClass('sponsoremail_address'); validateFormField('sponsoremail_address')" onfocus="addFocusClass('sponsoremail_address')" />
+											<input type="email" id="sponsoremail_address" name="sponsoremail_address" placeholder="johndoe@nscc.sg" data-validation="required flow-b step-3 email" data-error-message="" onblur="removeFocusClass('sponsoremail_address'); validateFormField('sponsoremail_address')" onfocus="addFocusClass('sponsoremail_address')" />
 										</div>
 									</div>
 									<span id="sponsoremail_address-error" class="error-message"></span>

@@ -112,11 +112,15 @@ a {
 	display: flex !important;
 }
 
-.option-b, .option-c, .yesField {
+.option-b,
+.option-c,
+.yesField {
 	display: none !important;
 }
 
-.option-b.flow-block, .option-c.flow-block, .yesField.flow-block {
+.option-b.flow-block,
+.option-c.flow-block,
+.yesField.flow-block {
 	display: flex !important;
 }
 
@@ -670,4 +674,19 @@ label.form-check-input {
 	padding: initial;
 	outline: none;
 	border: none;
+}
+
+select {
+	outline: none;
+	border: none;
+	background: none;
+
+	padding: 1px 0px 0.5px 0px;
+
+	font-size: 14px;
+	color: #aaaaaa;
+}
+
+select.selected {
+	color: #000000;
 }
