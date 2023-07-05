@@ -752,7 +752,6 @@ function validateFormFields() {
 	const selectedValue = selectElement.value;
 
 	// Perform an action based on the selected value
-	console.log(selectedValue);
 	if (selectedValue !== "Default") {
 		selectElement.classList.add("selected");
 
@@ -809,7 +808,6 @@ function validateFormFields() {
 			validateFormField(inputId);
 
 			if (firstError === 0 && hasError === 1) {
-				console.log(firstError);
 				if (viewportWidth <= 768) {
 					if (dataValidation.includes("step-1")) {
 						mobileState = 1;
@@ -831,7 +829,6 @@ function validateFormFields() {
 				let inputField = document.getElementById(inputId);
 				inputField.focus();
 				firstError = 1;
-				console.log(firstError);
 			}
 		}
 	});
@@ -967,7 +964,6 @@ function changedropdown() {
 	const selectedValue = selectElement.value;
 
 	// Perform an action based on the selected value
-	console.log(selectedValue);
 	if (selectedValue != "Default") {
 		selectElement.classList.add("selected");
 	} else {
@@ -987,7 +983,6 @@ function validatedropdown() {
 	const selectedValue = selectElement.value;
 
 	// Perform an action based on the selected value
-	console.log(selectedValue);
 	if (selectedValue !== "Default") {
 		selectElement.classList.add("selected");
 
