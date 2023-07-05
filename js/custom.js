@@ -76,6 +76,15 @@ function peristentState() {
 	if (check1A.checked) {
 		handleCheckboxChange();
 	}
+
+	// Get the selected value
+	let selectElement = document.getElementById("salutation");
+	let selectedValue = selectElement.value;
+
+	// Perform an action based on the selected value
+	if (selectedValue != "Default") {
+		selectElement.classList.add("selected");
+	}
 }
 
 // Select all elements with the class name "required"
