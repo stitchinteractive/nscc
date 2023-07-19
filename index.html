@@ -27,13 +27,17 @@
 					<p>
 						Welcome to National Supercomputing Centre (&quot;NSCC&quot;) Account Creation Form.<br /><br />
 						Please complete the form to request for a user account. Kindly note that it will take 7 working days to process the creation of user account.<br /><br />
-						Note: If you are from A*STAR, NTU, NUS, SUTD, TCOMS, SMU, SIT, SP, TP or RP, you may skip this form and proceed to <a href="https://user.nscc.sg/saml/">New User Enrollment</a>.
+						<b>Important:</b> If you are from <b>A*STAR, NTU, NUS, SUTD, TCOMS, SMU, SIT, SP, TP or RP</b>, you may skip this form and proceed to <a href="https://user.nscc.sg/saml/">New User Enrolment</a>.
 					</p>
 					<div style="background-color: black; height: 1px"></div>
 					<div class="hide-lg" style="display: flex; flex-direction: row; justify-content: flex-end">
 						<button id="continue0" type="button" class="btn btn-primary">
 							<h4>Get started</h4>
 						</button>
+					</div>
+					<div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: auto">
+						<a href="https://www.nscc.sg/">NSCC’s Official Site</a>
+						<a href="https://help.nscc.sg/">NSCC’s Help Site</a>
 					</div>
 				</div>
 
@@ -77,6 +81,8 @@
 										<option value="Ms">Ms</option>
 										<option value="Dr">Dr</option>
 										<option value="Prof">Prof</option>
+										<option value="Asst Prof">Asst Prof</option>
+										<option value="Assoc Prof">Assoc Prof</option>
 									</select>
 								</div>
 								<span id="salutation-error" class="error-message"></span>
@@ -126,7 +132,7 @@
 										<label class="required" for="userid">Preferred NSCC User ID</label>
 									</div>
 									<div>
-										<input type="text" id="userid" name="userid" placeholder="NSCC0001" data-validation="required flow-g userid step-1" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
+										<input type="text" id="userid" name="userid" placeholder="XXXXXXXX" data-validation="required flow-g userid step-1" data-error-message="" onblur="removeFocusClass('userid'); validateFormField('userid')" onfocus="addFocusClass('userid')" />
 									</div>
 								</div>
 								<span id="userid-error" class="error-message"></span>
@@ -150,7 +156,7 @@
 										<label class="required" for="organisation">Name of Organisation</label>
 									</div>
 									<div>
-										<input type="text" id="organisation" name="organisation" placeholder="NSCC Singapore" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('organisation'); validateFormField('organisation')" onfocus="addFocusClass('organisation')" />
+										<input type="text" id="organisation" name="organisation" placeholder="Name of organisation" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('organisation'); validateFormField('organisation')" onfocus="addFocusClass('organisation')" />
 									</div>
 								</div>
 								<span id="organisation-error" class="error-message"></span>
@@ -164,7 +170,7 @@
 										<label class="required" for="department">Department</label>
 									</div>
 									<div>
-										<input type="text" id="department" name="department" placeholder="Research and Development" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('department'); validateFormField('department')" onfocus="addFocusClass('department')" />
+										<input type="text" id="department" name="department" placeholder="Department" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('department'); validateFormField('department')" onfocus="addFocusClass('department')" />
 									</div>
 								</div>
 								<span id="department-error" class="error-message"></span>
@@ -176,7 +182,7 @@
 										<label class="required" for="designation">Designation</label>
 									</div>
 									<div>
-										<input type="text" id="designation" name="designation" placeholder="Research Scientist" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('designation'); validateFormField('designation')" onfocus="addFocusClass('designation')" />
+										<input type="text" id="designation" name="designation" placeholder="Designation" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('designation'); validateFormField('designation')" onfocus="addFocusClass('designation')" />
 									</div>
 								</div>
 								<span id="designation-error" class="error-message"></span>
@@ -230,7 +236,7 @@
 										<label for="projec_id">Project ID (if applicable)</label>
 									</div>
 									<div>
-										<input type="text" id="projec_id" name="projec_id" placeholder="NSCC_RD_2023" data-validation="" data-error-message="" onblur="removeFocusClass('projec_id'); validateFormField('projec_id')" onfocus="addFocusClass('projec_id')" />
+										<input type="text" id="projec_id" name="projec_id" placeholder="92001234" data-validation="" data-error-message="" onblur="removeFocusClass('projec_id'); validateFormField('projec_id')" onfocus="addFocusClass('projec_id')" />
 									</div>
 								</div>
 								<span id="projec_id-error" class="error-message"></span>
@@ -266,7 +272,7 @@
 										<label class="required" for="governmentagencies">Specify the government agencies</label>
 									</div>
 									<div>
-										<input type="text" id="governmentagencies" name="governmentagencies" placeholder="Singapore Consortium for Synthetic Biology" data-validation="required flow-c step-3" data-error-message="This field is required for the selection of &ldquo;Government agencies&rdquo;" onblur="removeFocusClass('governmentagencies'); validateFormField('governmentagencies')" onfocus="addFocusClass('governmentagencies')" />
+										<input type="text" id="governmentagencies" name="governmentagencies" placeholder="Name of government agency(s)" data-validation="required flow-c step-3" data-error-message="This field is required for the selection of &ldquo;Government agencies&rdquo;" onblur="removeFocusClass('governmentagencies'); validateFormField('governmentagencies')" onfocus="addFocusClass('governmentagencies')" />
 									</div>
 								</div>
 								<span id="governmentagencies-error" class="error-message"></span>
@@ -358,7 +364,7 @@
 										<label class="required" for="projecttitle">Project title</label>
 									</div>
 									<div>
-										<input type="text" id="projecttitle" name="projecttitle" placeholder="Project Title" data-validation="required flow-a step-3" data-error-message="" onblur="removeFocusClass('projecttitle'); validateFormField('projecttitle')" onfocus="addFocusClass('projecttitle')" />
+										<input type="text" id="projecttitle" name="projecttitle" placeholder="Project title" data-validation="required flow-a step-3" data-error-message="" onblur="removeFocusClass('projecttitle'); validateFormField('projecttitle')" onfocus="addFocusClass('projecttitle')" />
 									</div>
 								</div>
 								<span id="projecttitle-error" class="error-message"></span>
@@ -559,7 +565,7 @@
 								<div class="input-group has-validation">
 									<div class="row-flex-max">
 										<input class="form-control" type="file" id="formFile" style="display: flex; padding: 16px; padding-left: 22px" />
-										<label for="formFile" class="form-label required">Upload completed sponsorship form</label>
+										<label for="formFile" class="form-label required">Upload endorsement email</label>
 									</div>
 									<div class="invalid-feedback">Please upload a valid sponsorship form in PDF or Word format with extension .pdf, .doc, or .docx.</div>
 								</div>
@@ -582,7 +588,7 @@
 						<div class="form-control para-group">
 							<p>
 								Our Privacy Statement sets out how we collect, use or disclose personal data that you have provided to us by completing this form.<br /><br />
-								Our Acceptable Use Policy are intended to ensure NSCC users utilize the national high performance computing (HPC) resources in a responsible and appropriate manner.<br /><br />
+								Our Acceptable Use Policy is intended to ensure NSCC users utilise the national high performance computing (HPC) resources in a responsible and appropriate manner.<br /><br />
 								By submitting this form, you are accepting and consenting to:
 							</p>
 
