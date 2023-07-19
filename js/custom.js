@@ -842,6 +842,53 @@ function validateFormFields() {
 		}
 	});
 
+	if (flowState === 2) {
+		var errorMessage = document.getElementById("formFile-error");
+
+		const fileInput = document.getElementById("formFile");
+		const files = fileInput.files;
+
+		let validFile = false;
+		for (let i = 0; i < files.length; i++) {
+			const fileName = files[i].name;
+			if (fileName.endsWith(".pdf") || fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
+				validFile = true;
+				break;
+			}
+		}
+
+		if (validFile) {
+			// Do something when a valid file is selected
+			console.log("Valid file selected.");
+		} else {
+			// Do something when no valid file is selected
+			console.log("Please select a .pdf, .doc, or .docx file.");
+		}
+
+		if (document.getElementById("formFile").files.length == 0 || validFile == false) {
+			console.log("no files selected");
+			// No file is uploaded
+			errorMessage.textContent = "Please upload a valid sponsorship form in PDF or Word format with extension .pdf, .doc, or .docx.";
+			errorMessage.classList.add("error-message-show");
+
+			if (firstError === 0) {
+				if (viewportWidth <= 768) {
+					mobileState = 3;
+					updateState(3);
+				}
+
+				let inputField = document.getElementById("formFile");
+				inputField.focus();
+				firstError = 1;
+			}
+
+			hasError = 1;
+		} else {
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+		}
+	}
+
 	if (flowState === 1 || flowState === 3 || flowState === 4) {
 		// Get the radio buttons
 		const radioButtons = document.getElementsByName("nationalprogrammeradio");
