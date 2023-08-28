@@ -62,7 +62,8 @@ if($_FILES["service_catalog"]["error"] != 4) {
     // Check if file already exists
     if (file_exists($target_file)) {
         echo "Sorry, file already exists.";
-        $error = 1; 
+        //$error = 1;
+        $error = 0; 
         $uploadOk = 0;
     }
 
@@ -260,6 +261,8 @@ switch($exampleRadios) {
         ));
         break;
 }
+$data=str_replace('"', "'",$data);
+$data=htmlspecialchars($data);
 
 var_dump($data);
 
@@ -274,8 +277,8 @@ $result = curl_exec($ch);
 curl_close($ch);
 $decodedResponse=json_decode($result, true);
 
-//var_dump($decodedResponse["result"]["status"]);
-//echo $decodedResponse["result"]["status"];
+var_dump($decodedResponse);
+echo $decodedResponse["result"]["status"];
 header("Location: index.php?status=".$error);
 exit();
 ?>
