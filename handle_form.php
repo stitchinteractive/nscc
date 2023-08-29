@@ -97,7 +97,7 @@ switch($exampleRadios) {
         $data = json_encode(array(
             "sysparm_id"  => "b57abe891b9031d0df41a79ce54bcb27",
             "sysparm_quantity" => "1",
-            "variable" => array(
+            "variables" => array(
                 "salutation" => $salutation,
                 "first_name" => $firstname,
                 "last_name" => $lastname,
@@ -126,7 +126,7 @@ switch($exampleRadios) {
         $rawData = array(
             "sysparm_id"  => "b57abe891b9031d0df41a79ce54bcb27",
             "sysparm_quantity" => "1",
-            "variable" => array(
+            "variables" => array(
                 "salutation" => $salutation,
                 "first_name" => $firstname,
                 "last_name" => $lastname,
@@ -163,7 +163,7 @@ switch($exampleRadios) {
         $rawData = array(
             "sysparm_id"  => "b57abe891b9031d0df41a79ce54bcb27",
             "sysparm_quantity" => "1",
-            "variable" => array(
+            "variables" => array(
                 "salutation" => $salutation,
                 "first_name" => $firstname,
                 "last_name" => $lastname,
@@ -200,7 +200,7 @@ switch($exampleRadios) {
         $rawData = array(
             "sysparm_id"  => "b57abe891b9031d0df41a79ce54bcb27",
             "sysparm_quantity" => "1",
-            "variable" => array(
+            "variables" => array(
                 "salutation" => $salutation,
                 "first_name" => $firstname,
                 "last_name" => $lastname,
@@ -236,7 +236,7 @@ switch($exampleRadios) {
         $data = json_encode(array(
             "sysparm_id"  => "b57abe891b9031d0df41a79ce54bcb27",
             "sysparm_quantity" => "1",
-            "variable" => array(
+            "variables" => array(
                 "salutation" => "mr",
                 "first_name" => "test",
                 "last_name" => "test",
