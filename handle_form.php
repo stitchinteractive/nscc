@@ -95,7 +95,7 @@ if($_FILES["service_catalog"]["error"] != 4) {
     $service_catalog = $base64;
 }
 
-//echo $service_catalog;
+// var_dump($service_catalog);
 
 switch($exampleRadios) {
     case "1":
@@ -143,6 +143,7 @@ switch($exampleRadios) {
                 "official_contact_number" => $contact_number,
                 "official_email_address" => $email_address,
                 "project_id_if_applicable" => $projec_id,
+                "Govt_Agen" => 'true',
                 "research_collaboration" => "Government_Agencies",
                 "specify_the_government_agencies" => $governmentagencies,
                 "manufacturing_trade_and_connectivity" => $researchdomain1,
@@ -180,6 +181,7 @@ switch($exampleRadios) {
                 "official_contact_number" => $contact_number,
                 "official_email_address" => $email_address,
                 "project_id_if_applicable" => $projec_id,
+                "Oth_research_coll"=> 'true',
                 "research_collaboration" => "Other_research_collaborators",
                 "specify_the_other_reasearch_collabarators" => $otherresearchcollaborators,
                 "manufacturing_trade_and_connectivity" => $researchdomain1,
@@ -217,6 +219,7 @@ switch($exampleRadios) {
                 "official_contact_number" => $contact_number,
                 "official_email_address" => $email_address,
                 "project_id_if_applicable" => $projec_id,
+                "project_info"=> 'true',
                 "research_collaboration" => "project_info",
                 "manufacturing_trade_and_connectivity" => $researchdomain1,
                 "human_health_and_potential" => $researchdomain2,
@@ -269,7 +272,7 @@ switch($exampleRadios) {
 $data=str_replace('"', "'",$data);
 $data=htmlspecialchars($data);
 
-var_dump($data);
+//var_dump($data);
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL,$host);
@@ -282,8 +285,8 @@ $result = curl_exec($ch);
 curl_close($ch);
 $decodedResponse=json_decode($result, true);
 
-var_dump($decodedResponse);
-echo $decodedResponse["result"]["status"];
+//var_dump($decodedResponse);
+//echo $decodedResponse["result"]["status"];
 header("Location: index.php?status=".$error);
 exit();
 ?>
