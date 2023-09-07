@@ -51,48 +51,52 @@ $sponsordesignation = $_POST["sponsordesignation"];
 $sponsorcontact_number = $_POST["sponsorcontact_number"];
 $sponsoremail_address = $_POST["sponsoremail_address"];
 //File
+$attachment_name = "";
+$service_catalog = "";
+
 //var_dump($_FILES);
 if($_FILES["service_catalog"]["error"] != 4) {
-    $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["service_catalog"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    //echo $_FILES["service_catalog"]["name"];
+    // $target_dir = "uploads/";
+    // $target_file = $target_dir . basename($_FILES["service_catalog"]["name"]);
+    // $uploadOk = 1;
+    // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    // //echo $_FILES["service_catalog"]["name"];
 
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
-        //$error = 1;
-        $error = 0; 
-        $uploadOk = 0;
-    }
+    // // Check if file already exists
+    // if (file_exists($target_file)) {
+    //     echo "Sorry, file already exists.";
+    //     //$error = 1;
+    //     $error = 0; 
+    //     $uploadOk = 0;
+    // }
 
-    // Check file size
-    if ($_FILES["service_catalog"]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
-        $error = 2;
-        $uploadOk = 0;
-    }
+    // // Check file size
+    // if ($_FILES["service_catalog"]["size"] > 500000) {
+    //     echo "Sorry, your file is too large.";
+    //     $error = 2;
+    //     $uploadOk = 0;
+    // }
 
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["service_catalog"]["tmp_name"], $target_file)) {
-            echo "The file ". htmlspecialchars( basename( $_FILES["service_catalog"]["name"])). " has been uploaded.";
-            $error = 0;
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-            $error = 3;
-        }
-    }
-    $service_catalog = htmlspecialchars( basename( $_FILES["service_catalog"]["name"]));
+    // // Check if $uploadOk is set to 0 by an error
+    // if ($uploadOk == 0) {
+    //     echo "Sorry, your file was not uploaded.";
+    //     // if everything is ok, try to upload file
+    // } else {
+    //     if (move_uploaded_file($_FILES["service_catalog"]["tmp_name"], $target_file)) {
+    //         echo "The file ". htmlspecialchars( basename( $_FILES["service_catalog"]["name"])). " has been uploaded.";
+    //         $error = 0;
+    //     } else {
+    //         echo "Sorry, there was an error uploading your file.";
+    //         $error = 3;
+    //     }
+    // }
+    // $service_catalog = htmlspecialchars( basename( $_FILES["service_catalog"]["name"]));
 
-    // $photoTmpPath = $_FILES['service_catalog']['tmp_name'];
-    // $data = file_get_contents($photoTmpPath);
-    // $base64 = base64_encode($data);
-    // $service_catalog = $base64;
+    $attachment_name = basename($_FILES["service_catalog"]["name"]);
+    $photoTmpPath = $_FILES['service_catalog']['tmp_name'];
+    $data = file_get_contents($photoTmpPath);
+    $base64 = base64_encode($data);
+    $service_catalog = $base64;
 }
 
 // var_dump($service_catalog);
@@ -114,6 +118,7 @@ switch($exampleRadios) {
                 "official_contact_number" => $contact_number,
                 "official_email_address" => $email_address,
                 "project_id_if_applicable" => $projec_id,
+                'Stakeholder_collaborators'=> 'true',
                 "research_collaboration" => "Stakeholder_collaborators",
                 "first_nameStakeholder" => $sponsorfirstname,
                 "last_nameStakeholder" => $sponsorlastname,
@@ -122,9 +127,10 @@ switch($exampleRadios) {
                 "designationStakeholderInfo" => $sponsordesignation,
                 "name_of_organisation" => $sponsororganisation,
                 "official_contact_numberStakeholder" => $sponsorcontact_number,
-                "official_email_addressStakeholder" => $sponsoremail_address,
-                "service_catalog" => $service_catalog
-            )
+                "official_email_addressStakeholder" => $sponsoremail_address
+            ),
+            "name" => $attachment_name,
+            "attachment" => $service_catalog
         ));
         break;
     case "2":
@@ -161,9 +167,9 @@ switch($exampleRadios) {
             )
         );
         if($nationalprogrammeradio == "yes") {
-            $rawData["variable"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
+            $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
-        $data = json_encode($rawData);
+        $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
         break;
     case "3":
         $rawData = array(
@@ -199,9 +205,9 @@ switch($exampleRadios) {
             )
         );
         if($nationalprogrammeradio == "yes") {
-            $rawData["variable"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
+            $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
-        $data = json_encode($rawData);
+        $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
         break;
     case "4":
         $rawData = array(
@@ -236,9 +242,9 @@ switch($exampleRadios) {
             )
         );
         if($nationalprogrammeradio == "yes") {
-            $rawData["variable"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
+            $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
-        $data = json_encode($rawData);
+        $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
         break;
     default:
         $data = json_encode(array(
@@ -269,10 +275,10 @@ switch($exampleRadios) {
         ));
         break;
 }
-$data=str_replace('"', "'",$data);
-$data=htmlspecialchars($data);
+// $data=str_replace('"', "'",$data);
+// $data=htmlspecialchars($data);
 
-//var_dump($data);
+// var_dump($data);
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL,$host);
@@ -285,7 +291,7 @@ $result = curl_exec($ch);
 curl_close($ch);
 $decodedResponse=json_decode($result, true);
 
-//var_dump($decodedResponse);
+// var_dump($decodedResponse);
 //echo $decodedResponse["result"]["status"];
 header("Location: index.php?status=".$error);
 exit();
