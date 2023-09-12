@@ -275,10 +275,10 @@ switch($exampleRadios) {
         ));
         break;
 }
-// $data=str_replace('"', "'",$data);
-// $data=htmlspecialchars($data);
+$data=str_replace('"', "'",$data);
+$data=htmlspecialchars($data);
 
-// var_dump($data);
+//var_dump($data);
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL,$host);
