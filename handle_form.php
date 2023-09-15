@@ -52,6 +52,7 @@ $sponsorcontact_number = $_POST["sponsorcontact_number"];
 $sponsoremail_address = $_POST["sponsoremail_address"];
 //File
 $attachment_name = "";
+$attachment_type = "";
 $service_catalog = "";
 
 //var_dump($_FILES);
@@ -93,6 +94,9 @@ if($_FILES["service_catalog"]["error"] != 4) {
     // $service_catalog = htmlspecialchars( basename( $_FILES["service_catalog"]["name"]));
 
     $attachment_name = basename($_FILES["service_catalog"]["name"]);
+    $filename = $_FILES["service_catalog"]["name"];
+    $explodename = explode(".", $filename);
+    $attachment_type = end($explodename);
     $photoTmpPath = $_FILES['service_catalog']['tmp_name'];
     $data = file_get_contents($photoTmpPath);
     $base64 = base64_encode($data);
@@ -129,8 +133,9 @@ switch($exampleRadios) {
                 "official_contact_numberStakeholder" => $sponsorcontact_number,
                 "official_email_addressStakeholder" => $sponsoremail_address
             ),
-            "name" => $attachment_name,
-            "attachment" => $service_catalog
+            "filename" => $attachment_name,
+            "filetype" => $attachment_type,
+            "file" => $service_catalog
         ));
         break;
     case "2":
@@ -156,7 +161,7 @@ switch($exampleRadios) {
                 "human_health_and_potential" => $researchdomain2,
                 "urban_solutions_and_sustainability" => $researchdomain3,
                 "smart_nation_and_digital_economy" => $researchdomain4,
-                "other_please_provide_deatils_below" => $researchdomain5 == "true" ? $otherdomains : "false",
+                "other_please_provide_deatils_below" => $researchdomain5,
                 "is_your_research" => $nationalprogrammeradio,
                 "project_title" => $projecttitle,
                 "project_description" => $projectdescription,
@@ -166,6 +171,9 @@ switch($exampleRadios) {
                 "estimated_storage_gb_required" => $storage
             )
         );
+        if($researchdomain5 == "true") {
+            $rawData["variables"]["please_specify_the_other_domains"] = $otherdomains;
+        }
         if($nationalprogrammeradio == "yes") {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
@@ -194,7 +202,7 @@ switch($exampleRadios) {
                 "human_health_and_potential" => $researchdomain2,
                 "urban_solutions_and_sustainability" => $researchdomain3,
                 "smart_nation_and_digital_economy" => $researchdomain4,
-                "other_please_provide_deatils_below" => $researchdomain5 == "true" ? $otherdomains : "false",
+                "other_please_provide_deatils_below" => $researchdomain5,
                 "is_your_research" => $nationalprogrammeradio,
                 "project_title" => $projecttitle,
                 "project_description" => $projectdescription,
@@ -204,6 +212,9 @@ switch($exampleRadios) {
                 "estimated_storage_gb_required" => $storage
             )
         );
+        if($researchdomain5 == "true") {
+            $rawData["variables"]["please_specify_the_other_domains"] = $otherdomains;
+        }
         if($nationalprogrammeradio == "yes") {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
@@ -231,7 +242,7 @@ switch($exampleRadios) {
                 "human_health_and_potential" => $researchdomain2,
                 "urban_solutions_and_sustainability" => $researchdomain3,
                 "smart_nation_and_digital_economy" => $researchdomain4,
-                "other_please_provide_deatils_below" => $researchdomain5 == "true" ? $otherdomains : "false",
+                "other_please_provide_deatils_below" => $researchdomain5,
                 "is_your_research" => $nationalprogrammeradio,
                 "project_title" => $projecttitle,
                 "project_description" => $projectdescription,
@@ -241,6 +252,9 @@ switch($exampleRadios) {
                 "estimated_storage_gb_required" => $storage
             )
         );
+        if($researchdomain5 == "true") {
+            $rawData["variables"]["please_specify_the_other_domains"] = $otherdomains;
+        }
         if($nationalprogrammeradio == "yes") {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
@@ -275,7 +289,7 @@ switch($exampleRadios) {
         ));
         break;
 }
-$data=str_replace('"', "'",$data);
+//$data=str_replace('"', "'",$data);
 $data=htmlspecialchars($data);
 
 //var_dump($data);
