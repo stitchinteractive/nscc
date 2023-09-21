@@ -1,5 +1,5 @@
 <?php
-$host = 'https://kerisdev.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest';
+$host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest';
 $user_name = 'webuser@tfs.com';
 $password = 'Login@12345678';
 $error = 0;
@@ -305,7 +305,7 @@ $result = curl_exec($ch);
 curl_close($ch);
 $decodedResponse=json_decode($result, true);
 
-// var_dump($decodedResponse);
+//var_dump($decodedResponse);
 //echo $decodedResponse["result"]["status"];
 header("Location: index.php?status=".$error);
 exit();
