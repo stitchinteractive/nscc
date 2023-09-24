@@ -338,11 +338,11 @@
 							</div>
 							<div class="checkbox-group">
 								<div class="form-check">
-									<input class="form-check-input" onclick="noyesChange('A')" type="radio" name="nationalprogrammeradio" id="nationalprogrammeradio1" value="no" />
+									<input class="form-check-input" onclick="noyesChange('A')" type="radio" name="nationalprogrammeradio" id="nationalprogrammeradio1" value="No" />
 									<label class="form-check-label" onclick="noyesChange('A')" for="nationalprogrammeradio1"> No </label>
 								</div>
 								<div class="form-check">
-									<input class="form-check-input" onclick="noyesChange('B')" type="radio" name="nationalprogrammeradio" id="nationalprogrammeradio2" value="yes" />
+									<input class="form-check-input" onclick="noyesChange('B')" type="radio" name="nationalprogrammeradio" id="nationalprogrammeradio2" value="Yes" />
 									<label class="form-check-label" onclick="noyesChange('B')" for="nationalprogrammeradio2"> Yes </label>
 								</div>
 								<span id="nationalprogrammeradio-error" class="error-message"></span>

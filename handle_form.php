@@ -174,7 +174,7 @@ switch($exampleRadios) {
         if($researchdomain5 == "true") {
             $rawData["variables"]["please_specify_the_other_domains"] = $otherdomains;
         }
-        if($nationalprogrammeradio == "yes") {
+        if($nationalprogrammeradio == "Yes") {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
         $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
@@ -215,7 +215,7 @@ switch($exampleRadios) {
         if($researchdomain5 == "true") {
             $rawData["variables"]["please_specify_the_other_domains"] = $otherdomains;
         }
-        if($nationalprogrammeradio == "yes") {
+        if($nationalprogrammeradio == "Yes") {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
         $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
@@ -255,7 +255,7 @@ switch($exampleRadios) {
         if($researchdomain5 == "true") {
             $rawData["variables"]["please_specify_the_other_domains"] = $otherdomains;
         }
-        if($nationalprogrammeradio == "yes") {
+        if($nationalprogrammeradio == "Yes") {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
         $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
