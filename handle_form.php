@@ -1,7 +1,22 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'src/Exception.php';
+require 'src/PHPMailer.php';
+require 'src/SMTP.php';
+
+$email_username = 'admin@stitchinteractive.sg';
+$email_password = 'Obvious123!';
+$sender_email = 'admin@stitchinteractive.sg';
+$sender_name = 'Administrator';
+$admin_email = 'projects-admin@nscc.sg';
+$admin_name = 'Project Admin';
+
 $host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest';
 $user_name = 'webuser@tfs.com';
 $password = 'Login@12345678';
+$template_filename = "template1.html";
 $error = 0;
 
 //Personal Information
@@ -137,6 +152,7 @@ switch($exampleRadios) {
             "filetype" => $attachment_type,
             "file" => $service_catalog
         ));
+        $template_filename = "template1.html";
         break;
     case "2":
         $rawData = array(
@@ -178,6 +194,7 @@ switch($exampleRadios) {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
         $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
+        $template_filename = "template2.html";
         break;
     case "3":
         $rawData = array(
@@ -219,6 +236,7 @@ switch($exampleRadios) {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
         $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
+        $template_filename = "template3.html";
         break;
     case "4":
         $rawData = array(
@@ -259,6 +277,7 @@ switch($exampleRadios) {
             $rawData["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = $nationalprogramme;
         }
         $data = json_encode($rawData, JSON_UNESCAPED_SLASHES);
+        $template_filename = "template4.html";
         break;
     default:
         $data = json_encode(array(
@@ -287,6 +306,7 @@ switch($exampleRadios) {
                 "official_email_addressStakeholder" => "test"
             )
         ));
+        $template_filename = "template1.html";
         break;
 }
 //$data=str_replace('"', "'",$data);
@@ -304,6 +324,49 @@ curl_setopt($ch, CURLOPT_USERPWD, "$user_name:$password");
 $result = curl_exec($ch);
 curl_close($ch);
 $decodedResponse=json_decode($result, true);
+
+if($error == 0) {
+    $decodedText = html_entity_decode($data);
+    $email_data=json_decode($decodedText, true);
+    if($researchdomain5 == "false") {
+        $email_data["variables"]["please_specify_the_other_domains"] = "";
+    }
+    if($nationalprogrammeradio == "No") {
+        $email_data["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = "";
+    }
+    $template = file_get_contents($template_filename);
+    //var_dump($email_data);
+
+    foreach($email_data["variables"] as $key => $value)
+    {
+        $template = str_replace('{{ '.$key.' }}', $value, $template);
+    }
+    //var_dump($template);
+
+    $mail = new PHPMailer;
+    $mail->isSMTP(); 
+    $mail->SMTPDebug = 0; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
+    $mail->Host = "mail.stitchinteractive.sg"; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
+    $mail->Port = 587; // TLS only
+    $mail->SMTPSecure = 'tls'; // ssl is depracated
+    $mail->SMTPAuth = true;
+    $mail->Username = $email_username;
+    $mail->Password = $email_password;
+    $mail->setFrom($sender_email, $sender_name);
+    $mail->addAddress($admin_email, $admin_name);
+    $mail->addAddress($email_address, $firstname + " " + $lastname);
+    $mail->Subject = 'NSCC Form Submission';
+    $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
+    $mail->AltBody = 'HTML messaging not supported';
+    // $mail->addAttachment('images/phpmailer_mini.png'); //Attach an image file
+
+    if(!$mail->send()){
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    }else{
+        echo "Message sent!";
+    }
+}
+
 
 //var_dump($decodedResponse);
 //echo $decodedResponse["result"]["status"];
