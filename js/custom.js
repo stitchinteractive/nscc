@@ -1,6 +1,6 @@
 // Define variables for all elements
 const startContent = document.getElementById("start-content");
-const formContent = document.getElementById("form-content");
+const formContent = document.getElementById("nscc_form");
 const progressBar = document.getElementById("progress-bar");
 const step1 = document.getElementById("step-1");
 const step2 = document.getElementById("step-2");
@@ -530,9 +530,36 @@ function validateFormField(inputId) {
 		}
 	}
 
+	if (validationType.includes("number")) {
+		if (value === "") {
+			errorMessage.textContent = customErrorMessage || "This field is required";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+			hasError = 1;
+		} else if (/[^0-9+\-\(\)\s]/.test(value)) {
+			errorMessage.textContent = customErrorMessage || "Please enter a valid contact number";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+			hasError = 1;
+		} else {
+			errorMessage.textContent = "";
+			errorMessage.classList.remove("error-message-show");
+			inputField.classList.remove("error");
+			formField.classList.remove("error-field");
+		}
+	}
+
 	if (validationType.includes("email")) {
 		if (value === "") {
 			errorMessage.textContent = customErrorMessage || "This field is required";
+			errorMessage.classList.add("error-message-show");
+			inputField.classList.add("error");
+			formField.classList.add("error-field");
+			hasError = 1;
+		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+			errorMessage.textContent = customErrorMessage || "Please enter a valid email address.";
 			errorMessage.classList.add("error-message-show");
 			inputField.classList.add("error");
 			formField.classList.add("error-field");
@@ -970,9 +997,22 @@ function validateFormFields() {
 		}
 	}
 
+	var response = grecaptcha.getResponse();
+
+	if (response.length === 0) {
+		// reCAPTCHA not verified, show error message
+		document.getElementById("recaptcha-error").innerHTML = "Please complete the reCAPTCHA challenge.";
+		document.getElementById("recaptcha-error").classList.add("error-message-show");
+		let inputField = document.getElementById("myform");
+		inputField.focus();
+		hasError = 1;
+	} else {
+		document.getElementById("recaptcha-error").classList.remove("error-message-show");
+	}
+
 	if (hasError === 0) {
 		// Submit form
-		const form = document.querySelector('form');
+		const form = document.querySelector("form");
 		form.submit();
 	}
 }
@@ -1003,10 +1043,10 @@ function onPageLoad() {
 	const queryString = window.location.search;
 	//console.log(queryString);
 	const urlParams = new URLSearchParams(queryString);
-	const status = urlParams.get('status');
+	const status = urlParams.get("status");
 	//console.log(status);
-	if(status != null) {
-		if(status != 0) {
+	if (status != null) {
+		if (status != 0) {
 			showError();
 		} else {
 			showModal();

@@ -40,7 +40,7 @@
 					</div>
 				</div>
 
-				<div class="form-content" id="form-content">
+				<form class="form-content" id="nscc_form" action="handle_form.php" method="POST" enctype="multipart/form-data">
 					<div class="progress-bar vert-flex hide-md" id="progress-bar">
 						<span id="dot-1" class="dot">
 							<h3 class="prevent-select">1</h3>
@@ -64,7 +64,7 @@
 							<h3 class="prevent-select">4</h3>
 						</span>
 					</div>
-					<form action="handle_form.php" method="POST" id="nscc_form" enctype="multipart/form-data">
+
 					<div class="step-1 step-content" id="step-1">
 						<h3>Personal Information</h3>
 
@@ -196,7 +196,7 @@
 										<label class="required" for="contact_number">Official contact number</label>
 									</div>
 									<div>
-										<input type="text" id="contact_number" name="contact_number" placeholder="+65 XXXX XXXX" data-validation="required flow-g step-2" data-error-message="" onblur="removeFocusClass('contact_number'); validateFormField('contact_number')" onfocus="addFocusClass('contact_number')" />
+										<input type="text" id="contact_number" name="contact_number" placeholder="+65 XXXX XXXX" data-validation="required flow-g step-2 number" data-error-message="" onblur="removeFocusClass('contact_number'); validateFormField('contact_number')" onfocus="addFocusClass('contact_number')" />
 									</div>
 								</div>
 								<span id="contact_number-error" class="error-message"></span>
@@ -532,7 +532,7 @@
 											<label class="required" for="sponsorcontact_number">Official contact number</label>
 										</div>
 										<div>
-											<input type="text" id="sponsorcontact_number" name="sponsorcontact_number" placeholder="+65 XXXX XXXX" data-validation="required flow-b step-3" data-error-message="" onblur="removeFocusClass('sponsorcontact_number'); validateFormField('sponsorcontact_number')" onfocus="addFocusClass('sponsorcontact_number')" />
+											<input type="text" id="sponsorcontact_number" name="sponsorcontact_number" placeholder="+65 XXXX XXXX" data-validation="required flow-b step-3 number" data-error-message="" onblur="removeFocusClass('sponsorcontact_number'); validateFormField('sponsorcontact_number')" onfocus="addFocusClass('sponsorcontact_number')" />
 										</div>
 									</div>
 									<span id="sponsorcontact_number-error" class="error-message"></span>
@@ -615,8 +615,8 @@
 							</div>
 
 							<p>For further assistance, please contact us at <a href="mailto:bizdev@nscc.sg" target="_blank">bizdev@nscc.sg</a>.</p>
-							<form action="?" method="POST">
-								<div class="g-recaptcha" data-sitekey="6Le_RcMlAAAAAF-Tmm2ezyxMPNfmXVCSDBYBxPvW" data-size="normal"></div>
+							<form id="myform" action="?" method="POST">
+								<div class="g-recaptcha" data-sitekey="6LdSdZUoAAAAAJ8EhPVSwMDWeEAryoTdnCbKMmKe" data-size="normal"></div>
 								<span id="recaptcha-error" class="error-message"></span>
 							</form>
 						</div>
@@ -635,8 +635,7 @@
 
 						<line></line>
 					</div>
-					</form>
-				</div>
+				</form>
 			</div>
 		</div>
 
