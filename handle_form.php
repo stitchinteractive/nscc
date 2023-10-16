@@ -358,7 +358,10 @@ if($error == 0) {
     $mail->Subject = 'NSCC Form Submission';
     $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
     $mail->AltBody = 'HTML messaging not supported';
-    // $mail->addAttachment('images/phpmailer_mini.png'); //Attach an image file
+    if($_FILES["service_catalog"]["error"] != 4) {
+        $mail->addAttachment($photoTmpPath, $filename); //Attach an image file
+
+    }
 
     if(!$mail->send()){
         echo "Mailer Error: " . $mail->ErrorInfo;
