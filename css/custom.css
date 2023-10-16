@@ -344,8 +344,7 @@ body {
 
 .form-content {
 	flex-grow: 1;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow-y: auto;
 
 	display: flex;
 	flex-direction: column;
@@ -411,8 +410,7 @@ body {
 	.form-content {
 		flex-grow: 1;
 		background-color: var(--color-white);
-		overflow-y: scroll;
-		overflow-x: hidden;
+		overflow: auto;
 
 		display: flex;
 		flex-direction: column;
