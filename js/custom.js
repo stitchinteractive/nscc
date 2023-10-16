@@ -971,14 +971,46 @@ function validateFormFields() {
 	}
 
 	if (hasError === 0) {
-		// Get the modal element
-		const modal = document.getElementById("exampleModal");
+		// Submit form
+		const form = document.querySelector('form');
+		form.submit();
+	}
+}
 
-		// Create a Bootstrap modal instance
-		const modalInstance = new bootstrap.Modal(modal);
+function showModal() {
+	// Get the modal element
+	const modal = document.getElementById("exampleModal");
 
-		// Open the modal
-		modalInstance.show();
+	// Create a Bootstrap modal instance
+	const modalInstance = new bootstrap.Modal(modal);
+
+	// Open the modal
+	modalInstance.show();
+}
+
+function showError() {
+	// Get the modal element
+	const modal = document.getElementById("errorModal");
+
+	// Create a Bootstrap modal instance
+	const modalInstance = new bootstrap.Modal(modal);
+
+	// Open the modal
+	modalInstance.show();
+}
+
+function onPageLoad() {
+	const queryString = window.location.search;
+	//console.log(queryString);
+	const urlParams = new URLSearchParams(queryString);
+	const status = urlParams.get('status');
+	//console.log(status);
+	if(status != null) {
+		if(status != 0) {
+			showError();
+		} else {
+			showModal();
+		}
 	}
 }
 
