@@ -6,14 +6,18 @@ require 'src/Exception.php';
 require 'src/PHPMailer.php';
 require 'src/SMTP.php';
 
+$email_host = "mail.stitchinteractive.sg";
+$email_port = 587;
 $email_username = 'admin@stitchinteractive.sg';
 $email_password = 'Obvious123!';
 $sender_email = 'admin@stitchinteractive.sg';
 $sender_name = 'Administrator';
 $admin_email = 'projects-admin@nscc.sg';
 $admin_name = 'Project Admin';
+$email_subject = 'NSCC Form Submission';
 
-$host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest';
+//$host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //UAT
+$host = 'https://keris.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //PROD
 $user_name = 'webuser@tfs.com';
 $password = 'Login@12345678';
 $template_filename = "template1.html";
@@ -346,8 +350,8 @@ if($error == 0) {
     $mail = new PHPMailer;
     $mail->isSMTP(); 
     $mail->SMTPDebug = 0; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
-    $mail->Host = "mail.stitchinteractive.sg"; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
-    $mail->Port = 587; // TLS only
+    $mail->Host = $email_host; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
+    $mail->Port = $email_port; // TLS only
     $mail->SMTPSecure = 'tls'; // ssl is depracated
     $mail->SMTPAuth = true;
     $mail->Username = $email_username;
@@ -355,7 +359,7 @@ if($error == 0) {
     $mail->setFrom($sender_email, $sender_name);
     $mail->addAddress($admin_email, $admin_name);
     $mail->addAddress($email_address, $firstname + " " + $lastname);
-    $mail->Subject = 'NSCC Form Submission';
+    $mail->Subject = $email_subject;
     $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
     $mail->AltBody = 'HTML messaging not supported';
     if($_FILES["service_catalog"]["error"] != 4) {
