@@ -359,7 +359,7 @@ if($error == 0) {
     $mail->Username = $email_username;
     $mail->Password = $email_password;
     $mail->setFrom($sender_email, $sender_name);
-    $mail->addAddress($admin_email, $admin_name, $admin_name2);
+    $mail->addAddress($admin_email, $admin_name, $admin_email2);
     $mail->addAddress($email_address, $firstname + " " + $lastname);
     $mail->Subject = $email_subject;
     $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
