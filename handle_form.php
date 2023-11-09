@@ -6,6 +6,8 @@ require 'src/Exception.php';
 require 'src/PHPMailer.php';
 require 'src/SMTP.php';
 
+$_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); // To sanitize the post data
+
 $email_host = "mail.stitchinteractive.sg";
 $email_port = 587;
 $email_username = 'admin@stitchinteractive.sg';
@@ -320,18 +322,46 @@ $data=htmlspecialchars($data);
 
 //var_dump($data);
 
+$privatekey = '6LdLxAgpAAAAANlWgQE0KcVe6sOYY5cOmCv6uWjs';
+var_dump($_POST['g-recaptcha-response']);
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL,$host);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-curl_setopt($ch, CURLOPT_USERPWD, "$user_name:$password");
-$result = curl_exec($ch);
+curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, [
+    'secret' => $privatekey,
+    'response' => $_POST['g-recaptcha-response'],
+    'remoteip' => $_SERVER['REMOTE_ADDR']
+]);
+
+$resp = json_decode(curl_exec($ch));
 curl_close($ch);
-$decodedResponse=json_decode($result, true);
+
+//var_dump($resp);
+if ($resp->success) {
+    // Success
+    $error = 0;
+} else {
+    // failure
+    echo "captcha fail";
+    $error = 1;
+}
 
 if($error == 0) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,$host);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($ch, CURLOPT_USERPWD, "$user_name:$password");
+    $result = curl_exec($ch);
+    curl_close($ch);
+    $decodedResponse=json_decode($result, true);
+    //var_dump($decodedResponse);
+    //echo $decodedResponse["result"]["status"];
+
     $decodedText = html_entity_decode($data);
     $email_data=json_decode($decodedText, true);
     if($researchdomain5 == "false") {
@@ -361,7 +391,7 @@ if($error == 0) {
     $mail->setFrom($sender_email, $sender_name);
     $mail->addAddress($admin_email, $admin_name);
     $mail->addAddress($admin_email2, $admin_name2);
-    $mail->addAddress($email_address, $firstname + " " + $lastname);
+    $mail->addAddress($email_address, $firstname);
     $mail->Subject = $email_subject;
     $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
     $mail->AltBody = 'HTML messaging not supported';
@@ -377,9 +407,6 @@ if($error == 0) {
     }
 }
 
-
-//var_dump($decodedResponse);
-//echo $decodedResponse["result"]["status"];
 header("Location: index.php?status=".$error);
 exit();
 ?>

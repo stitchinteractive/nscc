@@ -616,7 +616,7 @@
 
 							<p>For further assistance, please contact us at <a href="mailto:bizdev@nscc.sg" target="_blank">bizdev@nscc.sg</a>.</p>
 							<form id="myform" action="?" method="POST">
-								<div class="g-recaptcha" data-sitekey="enter_secret_key_here" data-size="normal"></div>
+								<div class="g-recaptcha" data-sitekey="6LdLxAgpAAAAADD9JvjR5dVWgaQAWHypWJ7eFaiH" data-callback="onSubmit" data-size="normal"></div>
 								<span id="recaptcha-error" class="error-message"></span>
 							</form>
 						</div>
