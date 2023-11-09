@@ -14,6 +14,8 @@ $sender_email = 'admin@stitchinteractive.sg';
 $sender_name = 'Administrator';
 $admin_email = 'projects-admin@nscc.sg';
 $admin_name = 'Project Admin';
+$admin_email2 = 'bizdev@nscc.sg';
+$admin_name2 = 'Business Development Admin';
 $email_subject = 'NSCC Form Submission';
 
 //$host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //UAT
@@ -357,7 +359,7 @@ if($error == 0) {
     $mail->Username = $email_username;
     $mail->Password = $email_password;
     $mail->setFrom($sender_email, $sender_name);
-    $mail->addAddress($admin_email, $admin_name);
+    $mail->addAddress($admin_email, $admin_name, $admin_name2);
     $mail->addAddress($email_address, $firstname + " " + $lastname);
     $mail->Subject = $email_subject;
     $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
