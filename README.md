@@ -1,230 +1,237 @@
-[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://supportukrainenow.org/)
+# Standard Readme
 
-![PHPMailer](https://raw.github.com/PHPMailer/PHPMailer/master/examples/images/phpmailer.png)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-# PHPMailer – A full-featured email creation and transfer class for PHP
+A standard style for README files
 
-[![Test status](https://github.com/PHPMailer/PHPMailer/workflows/Tests/badge.svg)](https://github.com/PHPMailer/PHPMailer/actions)
-[![codecov.io](https://codecov.io/gh/PHPMailer/PHPMailer/branch/master/graph/badge.svg?token=iORZpwmYmM)](https://codecov.io/gh/PHPMailer/PHPMailer)
-[![Latest Stable Version](https://poser.pugx.org/phpmailer/phpmailer/v/stable.svg)](https://packagist.org/packages/phpmailer/phpmailer)
-[![Total Downloads](https://poser.pugx.org/phpmailer/phpmailer/downloads)](https://packagist.org/packages/phpmailer/phpmailer)
-[![License](https://poser.pugx.org/phpmailer/phpmailer/license.svg)](https://packagist.org/packages/phpmailer/phpmailer)
-[![API Docs](https://github.com/phpmailer/phpmailer/workflows/Docs/badge.svg)](https://phpmailer.github.io/PHPMailer/)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/PHPMailer/PHPMailer/badge)](https://api.securityscorecards.dev/projects/github.com/PHPMailer/PHPMailer)
+Your README file is normally the first entry point to your code. It should tell people why they should use your module, how they can install it, and how they can use it. Standardizing how you write your README makes creating and maintaining your READMEs easier. Great documentation takes work!
 
-## Features
-- Probably the world's most popular code for sending email from PHP!
-- Used by many open-source projects: WordPress, Drupal, 1CRM, SugarCRM, Yii, Joomla! and many more
-- Integrated SMTP support – send without a local mail server
-- Send emails with multiple To, CC, BCC, and Reply-to addresses
-- Multipart/alternative emails for mail clients that do not read HTML email
-- Add attachments, including inline
-- Support for UTF-8 content and 8bit, base64, binary, and quoted-printable encodings
-- SMTP authentication with LOGIN, PLAIN, CRAM-MD5, and XOAUTH2 mechanisms over SMTPS and SMTP+STARTTLS transports
-- Validates email addresses automatically
-- Protects against header injection attacks
-- Error messages in over 50 languages!
-- DKIM and S/MIME signing support
-- Compatible with PHP 5.5 and later, including PHP 8.2
-- Namespaced to prevent name clashes
-- Much more!
+This repository contains:
 
-## Why you might need it
-Many PHP developers need to send email from their code. The only PHP function that supports this directly is [`mail()`](https://www.php.net/manual/en/function.mail.php). However, it does not provide any assistance for making use of popular features such as encryption, authentication, HTML messages, and attachments.
+1. [The specification](spec.md) for how a standard README should look.
+2. A link to [a linter](https://github.com/RichardLitt/standard-readme-preset) you can use to keep your README maintained ([work in progress](https://github.com/RichardLitt/standard-readme/issues/5)).
+3. A link to [a generator](https://github.com/RichardLitt/generator-standard-readme) you can use to create standard READMEs.
+4. [A badge](#badge) to point to this spec.
+5. [Examples of standard READMEs](example-readmes/) - such as this file you are reading.
 
-Formatting email correctly is surprisingly difficult. There are myriad overlapping (and conflicting) standards, requiring tight adherence to horribly complicated formatting and encoding rules – the vast majority of code that you'll find online that uses the `mail()` function directly is just plain wrong, if not unsafe!
+Standard Readme is designed for open source libraries. Although it’s [historically](#background) made for Node and npm projects, it also applies to libraries in other languages and package managers.
 
-The PHP `mail()` function usually sends via a local mail server, typically fronted by a `sendmail` binary on Linux, BSD, and macOS platforms, however, Windows usually doesn't include a local mail server; PHPMailer's integrated SMTP client allows email sending on all platforms without needing a local mail server. Be aware though, that the `mail()` function should be avoided when possible; it's both faster and [safer](https://exploitbox.io/paper/Pwning-PHP-Mail-Function-For-Fun-And-RCE.html) to use SMTP to localhost.
 
-*Please* don't be tempted to do it yourself – if you don't use PHPMailer, there are many other excellent libraries that
-you should look at before rolling your own. Try [SwiftMailer](https://swiftmailer.symfony.com/)
-, [Laminas/Mail](https://docs.laminas.dev/laminas-mail/), [ZetaComponents](https://github.com/zetacomponents/Mail), etc.
+## Table of Contents
 
-## License
-This software is distributed under the [LGPL 2.1](http://www.gnu.org/licenses/lgpl-2.1.html) license, along with the [GPL Cooperation Commitment](https://gplcc.github.io/gplcc/). Please read [LICENSE](https://github.com/PHPMailer/PHPMailer/blob/master/LICENSE) for information on the software availability and distribution.
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+	- [Generator](#generator)
+- [Badge](#badge)
+- [Example Readmes](#example-readmes)
+- [Related Efforts](#related-efforts)
+- [Maintainers](#maintainers)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Installation & loading
-PHPMailer is available on [Packagist](https://packagist.org/packages/phpmailer/phpmailer) (using semantic versioning), and installation via [Composer](https://getcomposer.org) is the recommended way to install PHPMailer. Just add this line to your `composer.json` file:
+## Background
 
-```json
-"phpmailer/phpmailer": "^6.8.1"
-```
+Standard Readme started with the issue originally posed by [@maxogden](https://github.com/maxogden) over at [feross/standard](https://github.com/feross/standard) in [this issue](https://github.com/feross/standard/issues/141), about whether or not a tool to standardize readmes would be useful. A lot of that discussion ended up in [zcei's standard-readme](https://github.com/zcei/standard-readme/issues/1) repository. While working on maintaining the [IPFS](https://github.com/ipfs) repositories, I needed a way to standardize Readmes across that organization. This specification started as a result of that.
 
-or run
+> Your documentation is complete when someone can use your module without ever
+having to look at its code. This is very important. This makes it possible for
+you to separate your module's documented interface from its internal
+implementation (guts). This is good because it means that you are free to
+change the module's internals as long as the interface remains the same.
+
+> Remember: the documentation, not the code, defines what a module does.
+
+~ [Ken Williams, Perl Hackers](http://mathforum.org/ken/perl_modules.html#document)
+
+Writing READMEs is way too hard, and keeping them maintained is difficult. By offloading this process - making writing easier, making editing easier, making it clear whether or not an edit is up to spec or not - you can spend less time worrying about whether or not your initial documentation is good, and spend more time writing and using code.
+
+By having a standard, users can spend less time searching for the information they want. They can also build tools to gather search terms from descriptions, to automatically run example code, to check licensing, and so on.
+
+The goals for this repository are:
+
+1. A well defined **specification**. This can be found in the [Spec document](spec.md). It is a constant work in progress; please open issues to discuss changes.
+2. **An example README**. This Readme is fully standard-readme compliant, and there are more examples in the `example-readmes` folder.
+3. A **linter** that can be used to look at errors in a given Readme. Please refer to the [tracking issue](https://github.com/RichardLitt/standard-readme/issues/5).
+4. A **generator** that can be used to quickly scaffold out new READMEs. See [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme).
+5. A **compliant badge** for users. See [the badge](#badge).
+
+## Install
+
+This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Go check them out if you don't have them locally installed.
 
 ```sh
-composer require phpmailer/phpmailer
+$ npm install --global standard-readme-spec
 ```
 
-Note that the `vendor` folder and the `vendor/autoload.php` script are generated by Composer; they are not part of PHPMailer.
+## Usage
 
-If you want to use the Gmail XOAUTH2 authentication class, you will also need to add a dependency on the `league/oauth2-client` package in your `composer.json`.
+This is only a documentation package. You can print out [spec.md](spec.md) to your console:
 
-Alternatively, if you're not using Composer, you
-can [download PHPMailer as a zip file](https://github.com/PHPMailer/PHPMailer/archive/master.zip), (note that docs and examples are not included in the zip file), then copy the contents of the PHPMailer folder into one of the `include_path` directories specified in your PHP configuration and load each class file manually:
-
-```php
-<?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'path/to/PHPMailer/src/Exception.php';
-require 'path/to/PHPMailer/src/PHPMailer.php';
-require 'path/to/PHPMailer/src/SMTP.php';
+```sh
+$ standard-readme-spec
+# Prints out the standard-readme spec
 ```
 
-If you're not using the `SMTP` class explicitly (you're probably not), you don't need a `use` line for the SMTP class. Even if you're not using exceptions, you do still need to load the `Exception` class as it is used internally.
+### Generator
 
-## Legacy versions
-PHPMailer 5.2 (which is compatible with PHP 5.0 — 7.0) is no longer supported, even for security updates. You will find the latest version of 5.2 in the [5.2-stable branch](https://github.com/PHPMailer/PHPMailer/tree/5.2-stable). If you're using PHP 5.5 or later (which you should be), switch to the 6.x releases.
+To use the generator, look at [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme). There is a global executable to run the generator in that package, aliased as `standard-readme`.
 
-### Upgrading from 5.2
-The biggest changes are that source files are now in the `src/` folder, and PHPMailer now declares the namespace `PHPMailer\PHPMailer`. This has several important effects – [read the upgrade guide](https://github.com/PHPMailer/PHPMailer/tree/master/UPGRADING.md) for more details.
+## Badge
 
-### Minimal installation
-While installing the entire package manually or with Composer is simple, convenient, and reliable, you may want to include only vital files in your project. At the very least you will need [src/PHPMailer.php](https://github.com/PHPMailer/PHPMailer/tree/master/src/PHPMailer.php). If you're using SMTP, you'll need [src/SMTP.php](https://github.com/PHPMailer/PHPMailer/tree/master/src/SMTP.php), and if you're using POP-before SMTP (*very* unlikely!), you'll need [src/POP3.php](https://github.com/PHPMailer/PHPMailer/tree/master/src/POP3.php). You can skip the [language](https://github.com/PHPMailer/PHPMailer/tree/master/language/) folder if you're not showing errors to users and can make do with English-only errors. If you're using XOAUTH2 you will need [src/OAuth.php](https://github.com/PHPMailer/PHPMailer/tree/master/src/OAuth.php) as well as the Composer dependencies for the services you wish to authenticate with. Really, it's much easier to use Composer!
+If your README is compliant with Standard-Readme and you're on GitHub, it would be great if you could add the badge. This allows people to link back to this Spec, and helps adoption of the README. The badge is **not required**.
 
-## A Simple Example
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-```php
-<?php
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+To add in Markdown format, use this code:
 
-//Load Composer's autoloader
-require 'vendor/autoload.php';
-
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
-
-try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'user@example.com';                     //SMTP username
-    $mail->Password   = 'secret';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-    //Recipients
-    $mail->setFrom('from@example.com', 'Mailer');
-    $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
-    $mail->addAddress('ellen@example.com');               //Name is optional
-    $mail->addReplyTo('info@example.com', 'Information');
-    $mail->addCC('cc@example.com');
-    $mail->addBCC('bcc@example.com');
-
-    //Attachments
-    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
+```
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 ```
 
-You'll find plenty to play with in the [examples](https://github.com/PHPMailer/PHPMailer/tree/master/examples) folder, which covers many common scenarios including sending through Gmail, building contact forms, sending to mailing lists, and more.
+## Example Readmes
 
-If you are re-using the instance (e.g. when sending to a mailing list), you may need to clear the recipient list to avoid sending duplicate messages. See [the mailing list example](https://github.com/PHPMailer/PHPMailer/blob/master/examples/mailing_list.phps) for further guidance.
+To see how the specification has been applied, see the [example-readmes](example-readmes/).
 
-That's it. You should now be ready to use PHPMailer!
+## Related Efforts
 
-## Localization
-PHPMailer defaults to English, but in the [language](https://github.com/PHPMailer/PHPMailer/tree/master/language/) folder, you'll find many translations for PHPMailer error messages that you may encounter. Their filenames contain [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1) language code for the translations, for example `fr` for French. To specify a language, you need to tell PHPMailer which one to use, like this:
+- [Art of Readme](https://github.com/noffle/art-of-readme) - 💌 Learn the art of writing quality READMEs.
+- [open-source-template](https://github.com/davidbgk/open-source-template/) - A README template to encourage open-source contributions.
 
-```php
-//To load the French version
-$mail->setLanguage('fr', '/optional/path/to/language/directory/');
-```
+## Maintainers
 
-We welcome corrections and new languages – if you're looking for corrections, run the [Language/TranslationCompletenessTest.php](https://github.com/PHPMailer/PHPMailer/blob/master/test/Language/TranslationCompletenessTest.php) script in the tests folder and it will show any missing translations.
-
-## Documentation
-Start reading at the [GitHub wiki](https://github.com/PHPMailer/PHPMailer/wiki). If you're having trouble, head for [the troubleshooting guide](https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting) as it's frequently updated.
-
-Examples of how to use PHPMailer for common scenarios can be found in the [examples](https://github.com/PHPMailer/PHPMailer/tree/master/examples) folder. If you're looking for a good starting point, we recommend you start with [the Gmail example](https://github.com/PHPMailer/PHPMailer/tree/master/examples/gmail.phps).
-
-To reduce PHPMailer's deployed code footprint, examples are not included if you load PHPMailer via Composer or via [GitHub's zip file download](https://github.com/PHPMailer/PHPMailer/archive/master.zip), so you'll need to either clone the git repository or use the above links to get to the examples directly.
-
-Complete generated API documentation is [available online](https://phpmailer.github.io/PHPMailer/).
-
-You can generate complete API-level documentation by running `phpdoc` in the top-level folder, and documentation will appear in the `docs` folder, though you'll need to have [PHPDocumentor](http://www.phpdoc.org) installed. You may find [the unit tests](https://github.com/PHPMailer/PHPMailer/blob/master/test/PHPMailerTest.php) a good reference for how to do various operations such as encryption.
-
-If the documentation doesn't cover what you need, search the [many questions on Stack Overflow](http://stackoverflow.com/questions/tagged/phpmailer), and before you ask a question about "SMTP Error: Could not connect to SMTP host.", [read the troubleshooting guide](https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting).
-
-## Tests
-[PHPMailer tests](https://github.com/PHPMailer/PHPMailer/tree/master/test/) use PHPUnit 9, with [a polyfill](https://github.com/Yoast/PHPUnit-Polyfills) to let 9-style tests run on older PHPUnit and PHP versions.
-
-[![Test status](https://github.com/PHPMailer/PHPMailer/workflows/Tests/badge.svg)](https://github.com/PHPMailer/PHPMailer/actions)
-
-If this isn't passing, is there something you can do to help?
-
-## Security
-Please disclose any vulnerabilities found responsibly – report security issues to the maintainers privately.
-
-See [SECURITY](https://github.com/PHPMailer/PHPMailer/tree/master/SECURITY.md) and [PHPMailer's security advisories on GitHub](https://github.com/PHPMailer/PHPMailer/security). 
+[@RichardLitt](https://github.com/RichardLitt).
 
 ## Contributing
-Please submit bug reports, suggestions, and pull requests to the [GitHub issue tracker](https://github.com/PHPMailer/PHPMailer/issues).
 
-We're particularly interested in fixing edge cases, expanding test coverage, and updating translations.
+Feel free to dive in! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
 
-If you found a mistake in the docs, or want to add something, go ahead and amend the wiki – anyone can edit it.
+Standard Readme follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 
-If you have git clones from prior to the move to the PHPMailer GitHub organisation, you'll need to update any remote URLs referencing the old GitHub location with a command like this from within your clone:
+### Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="https://github.com/RichardLitt/standard-readme/graphs/contributors"><img src="https://opencollective.com/standard-readme/contributors.svg?width=890&button=false" /></a>
+
+
+## License
+
+[MIT](LICENSE) © Richard Littauer# Standard Readme
+
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+
+A standard style for README files
+
+Your README file is normally the first entry point to your code. It should tell people why they should use your module, how they can install it, and how they can use it. Standardizing how you write your README makes creating and maintaining your READMEs easier. Great documentation takes work!
+
+This repository contains:
+
+1. [The specification](spec.md) for how a standard README should look.
+2. A link to [a linter](https://github.com/RichardLitt/standard-readme-preset) you can use to keep your README maintained ([work in progress](https://github.com/RichardLitt/standard-readme/issues/5)).
+3. A link to [a generator](https://github.com/RichardLitt/generator-standard-readme) you can use to create standard READMEs.
+4. [A badge](#badge) to point to this spec.
+5. [Examples of standard READMEs](example-readmes/) - such as this file you are reading.
+
+Standard Readme is designed for open source libraries. Although it’s [historically](#background) made for Node and npm projects, it also applies to libraries in other languages and package managers.
+
+
+## Table of Contents
+
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+	- [Generator](#generator)
+- [Badge](#badge)
+- [Example Readmes](#example-readmes)
+- [Related Efforts](#related-efforts)
+- [Maintainers](#maintainers)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Background
+
+Standard Readme started with the issue originally posed by [@maxogden](https://github.com/maxogden) over at [feross/standard](https://github.com/feross/standard) in [this issue](https://github.com/feross/standard/issues/141), about whether or not a tool to standardize readmes would be useful. A lot of that discussion ended up in [zcei's standard-readme](https://github.com/zcei/standard-readme/issues/1) repository. While working on maintaining the [IPFS](https://github.com/ipfs) repositories, I needed a way to standardize Readmes across that organization. This specification started as a result of that.
+
+> Your documentation is complete when someone can use your module without ever
+having to look at its code. This is very important. This makes it possible for
+you to separate your module's documented interface from its internal
+implementation (guts). This is good because it means that you are free to
+change the module's internals as long as the interface remains the same.
+
+> Remember: the documentation, not the code, defines what a module does.
+
+~ [Ken Williams, Perl Hackers](http://mathforum.org/ken/perl_modules.html#document)
+
+Writing READMEs is way too hard, and keeping them maintained is difficult. By offloading this process - making writing easier, making editing easier, making it clear whether or not an edit is up to spec or not - you can spend less time worrying about whether or not your initial documentation is good, and spend more time writing and using code.
+
+By having a standard, users can spend less time searching for the information they want. They can also build tools to gather search terms from descriptions, to automatically run example code, to check licensing, and so on.
+
+The goals for this repository are:
+
+1. A well defined **specification**. This can be found in the [Spec document](spec.md). It is a constant work in progress; please open issues to discuss changes.
+2. **An example README**. This Readme is fully standard-readme compliant, and there are more examples in the `example-readmes` folder.
+3. A **linter** that can be used to look at errors in a given Readme. Please refer to the [tracking issue](https://github.com/RichardLitt/standard-readme/issues/5).
+4. A **generator** that can be used to quickly scaffold out new READMEs. See [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme).
+5. A **compliant badge** for users. See [the badge](#badge).
+
+## Install
+
+This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Go check them out if you don't have them locally installed.
 
 ```sh
-git remote set-url upstream https://github.com/PHPMailer/PHPMailer.git
+$ npm install --global standard-readme-spec
 ```
 
-Please *don't* use the SourceForge or Google Code projects any more; they are obsolete and no longer maintained.
+## Usage
 
-## Sponsorship
-Development time and resources for PHPMailer are provided by [Smartmessages.net](https://info.smartmessages.net/), the world's only privacy-first email marketing system.
+This is only a documentation package. You can print out [spec.md](spec.md) to your console:
 
-<a href="https://info.smartmessages.net/"><img src="https://www.smartmessages.net/img/smartmessages-logo.svg" width="550" alt="Smartmessages.net privacy-first email marketing logo"></a>
+```sh
+$ standard-readme-spec
+# Prints out the standard-readme spec
+```
 
-Donations are very welcome, whether in beer 🍺, T-shirts 👕, or cold, hard cash 💰. Sponsorship through GitHub is a simple and convenient way to say "thank you" to PHPMailer's maintainers and contributors – just click the "Sponsor" button [on the project page](https://github.com/PHPMailer/PHPMailer). If your company uses PHPMailer, consider taking part in Tidelift's enterprise support programme.
+### Generator
 
-## PHPMailer For Enterprise
+To use the generator, look at [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme). There is a global executable to run the generator in that package, aliased as `standard-readme`.
 
-Available as part of the Tidelift Subscription.
+## Badge
 
-The maintainers of PHPMailer and thousands of other packages are working with Tidelift to deliver commercial
-support and maintenance for the open-source packages you use to build your applications. Save time, reduce risk, and
-improve code health, while paying the maintainers of the exact packages you
-use. [Learn more.](https://tidelift.com/subscription/pkg/packagist-phpmailer-phpmailer?utm_source=packagist-phpmailer-phpmailer&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+If your README is compliant with Standard-Readme and you're on GitHub, it would be great if you could add the badge. This allows people to link back to this Spec, and helps adoption of the README. The badge is **not required**.
 
-## Changelog
-See [changelog](changelog.md).
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-## History
-- PHPMailer was originally written in 2001 by Brent R. Matzelle as a [SourceForge project](http://sourceforge.net/projects/phpmailer/).
-- [Marcus Bointon](https://github.com/Synchro) (`coolbru` on SF) and Andy Prevost (`codeworxtech`) took over the project in 2004.
-- Became an Apache incubator project on Google Code in 2010, managed by Jim Jagielski.
-- Marcus created [his fork on GitHub](https://github.com/Synchro/PHPMailer) in 2008.
-- Jim and Marcus decide to join forces and use GitHub as the canonical and official repo for PHPMailer in 2013.
-- PHPMailer moves to [the PHPMailer organisation](https://github.com/PHPMailer) on GitHub in 2013.
+To add in Markdown format, use this code:
 
-### What's changed since moving from SourceForge?
-- Official successor to the SourceForge and Google Code projects.
-- Test suite.
-- Continuous integration with GitHub Actions.
-- Composer support.
-- Public development.
-- Additional languages and language strings.
-- CRAM-MD5 authentication support.
-- Preserves full repo history of authors, commits, and branches from the original SourceForge project.
+```
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+```
+
+## Example Readmes
+
+To see how the specification has been applied, see the [example-readmes](example-readmes/).
+
+## Related Efforts
+
+- [Art of Readme](https://github.com/noffle/art-of-readme) - 💌 Learn the art of writing quality READMEs.
+- [open-source-template](https://github.com/davidbgk/open-source-template/) - A README template to encourage open-source contributions.
+
+## Maintainers
+
+[@RichardLitt](https://github.com/RichardLitt).
+
+## Contributing
+
+Feel free to dive in! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
+
+Standard Readme follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
+
+### Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="https://github.com/RichardLitt/standard-readme/graphs/contributors"><img src="https://opencollective.com/standard-readme/contributors.svg?width=890&button=false" /></a>
+
+
+## License
+
+[MIT](LICENSE) © Richard Littauer
