@@ -76,13 +76,13 @@
 									</div>
 									<select name="salutation" id="salutation" data-validation="">
 										<option value="Default">Select an option</option>
-										<option value="mr">Mr</option>
-										<option value="mrs">Mrs</option>
-										<option value="ms">Ms</option>
-										<option value="dr">Dr</option>
-										<option value="prof">Prof</option>
-										<option value="asst_prof">Asst Prof</option>
-										<option value="assoc_prof">Assoc Prof</option>
+										<option value="Mr">Mr</option>
+										<option value="Mrs">Mrs</option>
+										<option value="Ms">Ms</option>
+										<option value="Dr">Dr</option>
+										<option value="Prof">Prof</option>
+										<option value="Asst Prof">Asst Prof</option>
+										<option value="Assoc Prof">Assoc Prof</option>
 									</select>
 								</div>
 								<span id="salutation-error" class="error-message"></span>
