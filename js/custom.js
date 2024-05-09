@@ -603,6 +603,8 @@ function handleRadioChange(selection) {
 	var optionBElements = document.getElementsByClassName("option-b");
 	var optionCElements = document.getElementsByClassName("option-c");
 
+	var typeGroupElement = document.getElementsByClassName("typeGroup");
+
 	if (selection === "A") {
 		flowState = 2;
 
@@ -630,6 +632,11 @@ function handleRadioChange(selection) {
 
 		for (var i = 0; i < optionCElements.length; i++) {
 			optionCElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < typeGroupElement.length; i ++) {
+			typeGroupElement[i].style.visibility = 'hidden'
+			typeGroupElement[i].style.display = 'none'
 		}
 	} else if (selection === "B") {
 		flowState = 1;
@@ -660,6 +667,11 @@ function handleRadioChange(selection) {
 		for (var i = 0; i < optionCElements.length; i++) {
 			optionCElements[i].classList.remove("flow-block");
 		}
+
+		for (var i = 0; i < typeGroupElement.length; i ++) {
+			typeGroupElement[i].style.visibility = 'visible'
+			typeGroupElement[i].style.display = 'flex'
+		}
 	} else if (selection === "C") {
 		flowState = 3;
 
@@ -689,6 +701,11 @@ function handleRadioChange(selection) {
 		for (var i = 0; i < optionCElements.length; i++) {
 			optionCElements[i].classList.add("flow-block");
 		}
+
+		for (var i = 0; i < typeGroupElement.length; i ++) {
+			typeGroupElement[i].style.visibility = 'hidden'
+			typeGroupElement[i].style.display = 'none'
+		}
 	} else if (selection === "D") {
 		flowState = 4;
 
@@ -716,6 +733,11 @@ function handleRadioChange(selection) {
 
 		for (var i = 0; i < optionCElements.length; i++) {
 			optionCElements[i].classList.remove("flow-block");
+		}
+
+		for (var i = 0; i < typeGroupElement.length; i ++) {
+			typeGroupElement[i].style.visibility = 'hidden'
+			typeGroupElement[i].style.display = 'none'
 		}
 	} else {
 		console.log("Invalid selection");

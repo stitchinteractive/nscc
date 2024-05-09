@@ -436,7 +436,10 @@
 								<span id="userid-error" class="error-message"></span>
 							</div>
 
-							<div class="checkbox-group">
+							<div class="checkbox-group typeGroup">
+								<p class="required">Please select your HPC system</p>
+							</div>
+							<div class="checkbox-group typeGroup">
 								<div class="form-check">
 									<input class="form-check-input" type="radio" name="typeradio" id="typeradio1" value="Aspire2A" checked />
 									<label class="form-check-label" for="typeradio1"> A100 </label>
