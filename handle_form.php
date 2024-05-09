@@ -64,6 +64,7 @@ $projectduration = $_POST["projectduration"];
 $cpucorehours = $_POST["cpucorehours"];
 $gpucardhours = $_POST["gpucardhours"];
 $storage = $_POST["storage"];
+$type = isset($_POST["typeradio"]) ? $_POST["typeradio"] : "";
 //Collaboration
 $sponsorfirstname = $_POST["sponsorfirstname"];
 $sponsorlastname = $_POST["sponsorlastname"];
