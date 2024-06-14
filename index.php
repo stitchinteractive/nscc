@@ -441,12 +441,12 @@
 							</div>
 							<div class="checkbox-group typeGroup">
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="typeradio" id="typeradio1" value="Aspire2A" checked />
-									<label class="form-check-label" for="typeradio1"> A100 </label>
+									<input class="form-check-input" type="radio" name="typeradio" id="typeradio1" value="A100" checked />
+									<label class="form-check-label" for="typeradio1"> Aspire2A </label>
 								</div>
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="typeradio" id="typeradio2" value="Aspire2A+" />
-									<label class="form-check-label" for="typeradio2"> H100 </label>
+									<input class="form-check-input" type="radio" name="typeradio" id="typeradio2" value="H100" />
+									<label class="form-check-label" for="typeradio2"> Aspire2A+ </label>
 								</div>
 								<span id="typeradio-error" class="error-message"></span>
 							</div>

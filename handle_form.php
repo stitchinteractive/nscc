@@ -193,7 +193,8 @@ switch($exampleRadios) {
                 "project_duration" => $projectduration,
                 "estimated_cpu_core_hours_required" => $cpucorehours,
                 "estimated_gpu_card_hours_required" => $gpucardhours,
-                "estimated_storage_gb_required" => $storage
+                "estimated_storage_gb_required" => $storage,
+                "please_select_your_hpc_system" => $type
             )
         );
         if($researchdomain5 == "true") {
