@@ -148,7 +148,7 @@ switch($exampleRadios) {
                 "official_email_address" => $email_address,
                 "project_id_if_applicable" => $projec_id,
                 'Stakeholder_collaborators'=> 'true',
-                "research_collaboration" => "Sponsor's Collaboration",
+                "research_collaboration" => "Stakeholder_collaborators",
                 "first_nameStakeholder" => $sponsorfirstname,
                 "last_nameStakeholder" => $sponsorlastname,
                 "nationalityofStakehoders" => $sponsornationality,
