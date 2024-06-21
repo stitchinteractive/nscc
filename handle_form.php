@@ -20,9 +20,10 @@ $admin_email2 = 'bizdev@nscc.sg';
 $admin_name2 = 'Business Development Admin';
 $email_subject = 'NSCC Form Submission';
 
-//$host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //UAT
+$host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //UAT
 //$host = 'https://keris.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //PROD
-$host = 'https://kerisdev.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //DEV
+//$host = 'https://kerisdev.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //DEV
+
 $user_name = 'webuser@tfs.com';
 $password = 'Login@12345678';
 $template_filename = "template1.html";
