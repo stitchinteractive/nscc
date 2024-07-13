@@ -1035,6 +1035,7 @@ function validateFormFields() {
 	if (hasError === 0) {
 		// Submit form
 		const form = document.querySelector("form");
+		showWait();
 		form.submit();
 	}
 }
@@ -1053,6 +1054,17 @@ function showModal() {
 function showError() {
 	// Get the modal element
 	const modal = document.getElementById("errorModal");
+
+	// Create a Bootstrap modal instance
+	const modalInstance = new bootstrap.Modal(modal);
+
+	// Open the modal
+	modalInstance.show();
+}
+
+function showWait() {
+	// Get the modal element
+	const modal = document.getElementById("waitModal");
 
 	// Create a Bootstrap modal instance
 	const modalInstance = new bootstrap.Modal(modal);

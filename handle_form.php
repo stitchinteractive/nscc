@@ -21,8 +21,8 @@ $admin_name2 = 'Business Development Admin';
 $email_subject = 'NSCC Form Submission';
 
 //$host = 'https://keristest.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //UAT
-$host = 'https://keris.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //PROD
-//$host = 'https://kerisdev.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //DEV
+//$host = 'https://keris.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //PROD
+$host = 'https://kerisdev.service-now.com/api/fstf3/tfsnow_nscc/getservicerequest'; //DEV
 
 $user_name = 'webuser@tfs.com';
 $password = 'Login@12345678';
@@ -366,48 +366,52 @@ if($error == 0) {
     //var_dump($decodedResponse);
     //echo $decodedResponse["result"]["status"];
 
-    $decodedText = html_entity_decode($data);
-    $email_data=json_decode($decodedText, true);
-    if($researchdomain5 == "false") {
-        $email_data["variables"]["please_specify_the_other_domains"] = "";
-    }
-    if($nationalprogrammeradio == "No") {
-        $email_data["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = "";
-    }
-    $template = file_get_contents($template_filename);
-    //var_dump($email_data);
+    if($decodedResponse["result"]["status"] == "success") {
+        $decodedText = html_entity_decode($data);
+        $email_data=json_decode($decodedText, true);
+        if($researchdomain5 == "false") {
+            $email_data["variables"]["please_specify_the_other_domains"] = "";
+        }
+        if($nationalprogrammeradio == "No") {
+            $email_data["variables"]["indicate_the_name_of_the_national_programme_and_implementation_agency_ia"] = "";
+        }
+        $template = file_get_contents($template_filename);
+        //var_dump($email_data);
 
-    foreach($email_data["variables"] as $key => $value)
-    {
-        $template = str_replace('{{ '.$key.' }}', $value, $template);
-    }
-    //var_dump($template);
+        foreach($email_data["variables"] as $key => $value)
+        {
+            $template = str_replace('{{ '.$key.' }}', $value, $template);
+        }
+        //var_dump($template);
 
-    $mail = new PHPMailer;
-    $mail->isSMTP(); 
-    $mail->SMTPDebug = 0; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
-    $mail->Host = $email_host; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
-    $mail->Port = $email_port; // TLS only
-    $mail->SMTPSecure = 'tls'; // ssl is depracated
-    $mail->SMTPAuth = true;
-    $mail->Username = $email_username;
-    $mail->Password = $email_password;
-    $mail->setFrom($sender_email, $sender_name);
-    $mail->addAddress($admin_email, $admin_name);
-    $mail->addAddress($admin_email2, $admin_name2);
-    $mail->addAddress($email_address, $firstname);
-    $mail->Subject = $email_subject;
-    $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
-    $mail->AltBody = 'HTML messaging not supported';
-    if($_FILES["service_catalog"]["error"] != 4) {
-        $mail->addAttachment($photoTmpPath, $filename); //Attach an image file
+        $mail = new PHPMailer;
+        $mail->isSMTP(); 
+        $mail->SMTPDebug = 0; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
+        $mail->Host = $email_host; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
+        $mail->Port = $email_port; // TLS only
+        $mail->SMTPSecure = 'tls'; // ssl is depracated
+        $mail->SMTPAuth = true;
+        $mail->Username = $email_username;
+        $mail->Password = $email_password;
+        $mail->setFrom($sender_email, $sender_name);
+        $mail->addAddress($admin_email, $admin_name);
+        $mail->addAddress($admin_email2, $admin_name2);
+        $mail->addAddress($email_address, $firstname);
+        $mail->Subject = $email_subject;
+        $mail->msgHTML($template); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
+        $mail->AltBody = 'HTML messaging not supported';
+        if($_FILES["service_catalog"]["error"] != 4) {
+            $mail->addAttachment($photoTmpPath, $filename); //Attach an image file
 
-    }
+        }
 
-    if(!$mail->send()){
-        echo "Mailer Error: " . $mail->ErrorInfo;
-    }else{
-        echo "Message sent!";
+        if(!$mail->send()){
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        }else{
+            echo "Message sent!";
+        }
+    } else {
+        $error = 2;
     }
 }
 

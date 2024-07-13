@@ -687,6 +687,22 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="waitModal" tabindex="-1" aria-labelledby="waitModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header" style="border-bottom: none; z-index: +1">
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="box-shadow: none"></button>
+					</div>
+					<div class="modal-body" style="height: 100%; width: 100%">
+						<div class="group-box" style="padding-top: 50px; padding-bottom: 50px">
+							<h3 style="text-transform: none">We are processing your request.</h3>
+							<p class="text-center">Please wait.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<script src="js/custom.js"></script>
 
 		<!-- bootstrap core js -->
