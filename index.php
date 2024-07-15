@@ -695,8 +695,8 @@
 					</div>
 					<div class="modal-body" style="height: 100%; width: 100%">
 						<div class="group-box" style="padding-top: 50px; padding-bottom: 50px">
-							<h3 style="text-transform: none">We are processing your request.</h3>
-							<p class="text-center">Please wait.</p>
+							<h3 style="text-transform: none">We are submitting your form request.</h3>
+							<p class="text-center">Please do not refresh or close the browser.</p>
 						</div>
 					</div>
 				</div>
