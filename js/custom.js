@@ -1036,7 +1036,9 @@ function validateFormFields() {
 		// Submit form
 		const form = document.querySelector("form");
 		showWait();
-		form.submit();
+		setTimeout(function() {
+			form.submit();
+		}, 1000)
 	}
 }
 
